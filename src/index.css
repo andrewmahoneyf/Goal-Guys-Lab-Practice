@@ -14,11 +14,18 @@ header.well {
 header h1 {
     font-weight: bold;
     font-size: 70px;
+    margin-top: 0px;
 }
 
 header p {
     font-size: 25px;
     font-weight: 300;
+}
+header button {
+  float: right;
+  margin-bottom: 0px;
+  font-style: normal;
+
 }
 
 nav {
@@ -28,17 +35,17 @@ nav {
 }
 
 nav h2 {
-  font-size: 26px;
+  font-size: 24px;
   margin-top: 10px;
   font-weight: bold;
 }
 
 nav a {
-  /* force pointer for non-links */
   cursor: pointer; 
   color: white;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 300;
+  padding-left: 20px;
 }
 
 .cards-container {
