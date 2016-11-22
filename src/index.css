@@ -10,13 +10,11 @@ header.well {
   color: white;
   font-style: oblique;
 }
-
 header h1 {
     font-weight: bold;
     font-size: 70px;
     margin-top: 0px;
 }
-
 header p {
     font-size: 25px;
     font-weight: 300;
@@ -25,7 +23,6 @@ header button {
   float: right;
   margin-bottom: 0px;
   font-style: normal;
-
 }
 
 nav {
@@ -33,13 +30,11 @@ nav {
   background-color: darkgrey;
   padding: 1em;
 }
-
 nav h2 {
   font-size: 24px;
   margin-top: 10px;
   font-weight: bold;
 }
-
 nav a {
   cursor: pointer; 
   color: white;
@@ -52,31 +47,61 @@ nav a {
     overflow-y: hidden;
     overflow-x: auto;
     width: 50vw;
-    height: 300px;
+    height: 380px;
     padding: 0 15px;
     display: inline-flex;
 }
-
 .card {
     font-size: 20px;
     text-align: center;
-    min-width: 50vw;
+    width: 45vw;
+    height: 380px;
     padding-right: 6px;
     font-weight: 400;
 }
-body::-webkit-scrollbar, .cards-container::-webkit-scrollbar{
-    width: 1em;
+.carousel-indicators li { visibility: hidden; }
+.card .content {
+  margin: .5em 1em;
+  border: 1px solid rgba(160, 160, 160, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+  height: 95%;
+  width: 100%;
+  background-color:lightgrey;
 }
- 
-body::-webkit-scrollbar-track, .cards-container::-webkit-scrollbar-track{
+.card img {
+  width: 100%;
+  max-height: 250px;
+  max-width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.card .content > :not(img) {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.content .center {
+  padding-top: 20px;
+  line-height: 22px;
+}
+
+
+body::-webkit-scrollbar{ width: 1em;}
+body::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
- 
-body::-webkit-scrollbar-thumb, .cards-container::-webkit-scrollbar-thumb{
+body::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
+
+
+footer {
+  text-align:right;
+}
+
+
 
 @media (min-width: 768px) {
 
@@ -87,28 +112,3 @@ body::-webkit-scrollbar-thumb, .cards-container::-webkit-scrollbar-thumb{
 }
 
 
-.card .content {
-  margin: .5em 1em;
-  border: 1px solid rgba(160, 160, 160, 0.2);
-  border-radius: 10px;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
-  height: 95%;
-  width: 100%;
-  background-color:lightgrey;
-}
-
-.card img {
-  width: 100%;
-  height: 70%;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
-.card .content > :not(img) {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-footer {
-  text-align:right;
-}

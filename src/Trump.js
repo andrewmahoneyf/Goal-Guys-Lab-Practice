@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Carousel, Button } from 'react-bootstrap';
+import _ from 'lodash';
+
 
 var DT_IMAGES = [
   {img:'https://img.washingtonpost.com/blogs/the-fix/files/2016/04/Nah.gif'},
@@ -66,14 +69,18 @@ class TrumpQuotes extends React.Component {
 class QuoteList extends React.Component {
   render() {
     var quoteResults = this.props.quotes.map(function(message){
-      return <Quote quoteCard={message} />;
+      return (
+          <Carousel.Item>
+            <Quote quoteCard={message} />
+            </Carousel.Item>
+      );
     })
     return (
       <div>
         <h2>Donald's infamous quotes:</h2>
-        <div className="cards-container">
+        <Carousel className="cards-container">
           {quoteResults}
-        </div>
+        </Carousel>
       </div>
     );
   }
@@ -87,7 +94,9 @@ class Quote extends React.Component {
       <div className="card">
         <div className="content">
           <img src={DT_IMAGES[num].img} alt='Donald Trump' />
-          <p>"{message}" </p>
+          <div className="center">
+            <p>"{message}" </p>
+          </div>
         </div>
       </div>
     );
