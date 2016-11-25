@@ -2,6 +2,11 @@ import React from 'react';
 import _ from 'lodash';
 import './index.css'; //load CSS for this module
 import { Link, hashHistory } from 'react-router';
+import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
+import {AboutPage} from './About';
+import {FundamentalRightsPage} from './Laws';
+import {YoutubePage} from './Procedures';
+
 
 
 class App extends React.Component {
@@ -16,19 +21,23 @@ class App extends React.Component {
           </div>
         </header>
 
-        <main className="container">
-          <div className="row">
-            <div className="col-xs-3" role="navigation">
+          <main>
+            <div role="navigation">
               <Navigation/>
             </div>
-            <div className="col-xs-9" id="midpage">
+            <div className="container">
               {this.props.children}
             </div>
-          </div>
-        </main>
+          </main>
 
-        <footer className="container" role="contentinfo">
-          <small></small>
+        <footer role="contentinfo">
+          <small><p>Designed and Developed by Andrew Mahoney-Fernandes, Nattanon Bunyatipanon, Ryan Magee, and Darryl Ly</p> </small>
+          <a href="https://twitter.com/?lang=en"><i className="fa fa-twitter fa-2x" aria-label="twitter logo"></i></a>
+          <a href="https://www.facebook.com/"><i className="fa fa-facebook-square fa-2x" aria-label="facebook logo"></i></a>
+          <a href="mailto:goalguys@uw.edu"><i className="fa fa-envelope fa-2x" aria-label="email"></i></a>
+          <a href="tel:555-555-5555"><i className="fa fa-phone fa-2x" aria-label="call" ></i></a>
+          <br />
+          <small> <p> Copyright 2016 Goal Guys Design Inc. All Rights Reserved. </p> </small>
         </footer>
       </div>
     );
@@ -38,44 +47,54 @@ class App extends React.Component {
 class Navigation extends React.Component {
   render() {
     return (
-      <div>
-        <Links1 />
-        <Links2 />
-        <AboutLinks />
-      </div>
+      <Navbar inverse collapseOnSelect>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/" ><i className="fa fa-home" aria-label="call"></i></Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            <ProcedureLinks />
+            <LawLinks />
+            <AboutLinks />
+          </Nav>
+          <Nav pullRight>
+            <NavItem id="trump" eventKey={4}><Link to="/trump">Trump Quotes</Link></NavItem>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+
     );
   }
 }
 
-class Links1 extends React.Component {
+class ProcedureLinks extends React.Component {
 
   render() {
     return (
-      <nav>
-        <h2>General Procedures</h2>
-        <ul className="list-unstyled">
-          <li><a>YouTube Guides</a></li>
-          <li><a>Traffic Stops</a></li>
-          <li><a>At your Door</a></li>
-          <li><a>Popular Myths</a></li>
-          <li><a>General Questions</a></li>
-        </ul>
-      </nav>      
+      <NavDropdown eventKey={1} title="General Procedures" id="basic-nav-dropdown">
+        <MenuItem eventKey={1.1}><Link to="/youtube">YouTube Guides</Link></MenuItem>
+        <MenuItem eventKey={1.2}><Link to="/traffic">Traffic Stops</Link></MenuItem>
+        <MenuItem eventKey={1.3}><Link to="/door">At Your Door</Link></MenuItem>
+        <MenuItem divider />
+        <MenuItem eventKey={1.3}><Link to="/faq">FAQ</Link></MenuItem>
+      </NavDropdown>
     );
   }
 }
 
-class Links2 extends React.Component {
+class LawLinks extends React.Component {
   render() {
     return (
-      <nav>
-        <h2>Laws</h2>
-        <ul className="list-unstyled">
-          <li><a>Fundamental Rights</a></li>
-          <li><a>Contact a Lawyer</a></li>
-          <li><Link to="/trump" activeClassName="activeLink">Trump Quotes</Link></li>
-        </ul>
-      </nav>      
+      <NavDropdown eventKey={2} title="Laws" id="basic-nav-dropdown">
+        <MenuItem eventKey={2.1}><Link to="/amendments">The Bill of Rights</Link></MenuItem>
+        <MenuItem eventKey={2.2}><Link to="/rights">Fundamental Rights</Link></MenuItem>
+        <MenuItem eventKey={2.2}><Link to="/bills">Current Bills and Votes</Link></MenuItem>
+        <MenuItem eventKey={2.3}><Link to="/lawyers">Contact a Lawyer</Link></MenuItem>
+        <MenuItem eventKey={2.4}><Link to="/myths">Popular Myths</Link></MenuItem>
+      </NavDropdown>
     );
   }
 }
@@ -83,18 +102,30 @@ class Links2 extends React.Component {
 class AboutLinks extends React.Component {
   render() {
     return (
-      <nav>
-        <h2>About</h2>
-        <ul className="list-unstyled">
-          <li><a>How to Search</a></li>
-          <li><a>Donate</a></li>
-          <li><a>About Us</a></li>
-        </ul>
-      </nav>      
+      <NavDropdown eventKey={3} title="About" id="basic-nav-dropdown">
+        <MenuItem eventKey={3.1}><Link to="/about">About Us</Link></MenuItem>
+        <MenuItem eventKey={3.2}><Link to="/donate">Donate</Link></MenuItem>
+        <MenuItem eventKey={3.3}><Link to="/resources">Resources</Link></MenuItem>
+        <MenuItem divider />
+        <MenuItem eventKey={3.4}><Link to="/contact">Contact Us</Link></MenuItem>
+      </NavDropdown>
+    );
+  }
+}
+
+class HomePage extends React.Component {
+  render() {
+    return (
+      <main className="container">
+        <AboutPage />
+        <FundamentalRightsPage />
+        <YoutubePage/>
+      </main>   
     );
   }
 }
 
 
-
 export default App;
+
+export {App, HomePage};
