@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Carousel, Button } from 'react-bootstrap';
+import { Carousel } from 'react-bootstrap';
 import _ from 'lodash';
 
 
@@ -60,7 +60,9 @@ class TrumpQuotes extends React.Component {
   }
   render() {
       return (
-        <QuoteList quotes={this.state.quotes} />
+        <div  id="midpage">
+          <QuoteList quotes={this.state.quotes}/>
+        </div>
     );
   }
 }
