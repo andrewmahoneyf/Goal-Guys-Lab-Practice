@@ -13,17 +13,18 @@ header.well {
 }
 header h1 {
     font-weight: bold;
-    font-size: 70px;
+    font-size: 30px;
     margin-top: 0px;
 }
 header p {
-    font-size: 25px;
+    font-size: 12px;
     font-weight: 300;
 }
 header button {
   float: right;
   margin-bottom: 0px;
   font-style: normal;
+  size: 20px;
 }
 .fa-home {
   margin-top: 0px;
@@ -33,12 +34,10 @@ header button {
   max-height: 18px;
 }
 
-
-
 .cards-container {
     overflow-y: hidden;
     overflow-x: auto;
-    width: 50vw;
+    width: 90vw;
     height: 380px;
     padding: 0 15px;
     display: inline-flex;
@@ -46,7 +45,7 @@ header button {
 .card {
     font-size: 20px;
     text-align: center;
-    width: 45vw;
+    width: 80vw;
     height: 380px;
     padding-right: 6px;
     font-weight: 400;
@@ -88,7 +87,68 @@ body::-webkit-scrollbar-thumb {
   outline: 1px solid slategrey;
 }
 
+ol {
+  padding-left: 30px;
+  list-style-position: inside;
+}
 
+main h2 {
+  font-weight: bold;
+  color: darkslateblue;
+  margin-top: 10px;
+}
+main h3 {
+  font-weight: 400;
+}
+#emailInput {
+  width: 200px;
+  border-style: double;
+  border-color: darkslateblue;
+  padding-left: 4px;
+}
+#emailMessage {
+  height: 220px;
+  width: 403px;
+  vertical-align: text-top;
+  border-style: double;
+  border-color: darkslateblue;
+  padding-bottom: 190px;
+  padding-left: 10px;
+  font-size: 16pt;
+}
+#sendEmail {
+  width: 403px;
+  height: 40px;
+}
+#message {
+  color: green;
+  padding-left: 130px;
+}
+
+#infographic {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#adjust {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+#google_translate_element {
+  float: right;
+  padding: 50px 50px 0 0;
+}
+
+#trump {
+  color: grey;
+  font-weight: bold;
+  text-decoration: none;
+}
+#trump:hover, #trump:active {
+  color: white;
+}
 
 html {
   height: 100%;
@@ -102,7 +162,7 @@ body {
   min-height: 100%;
   font-family: "Helvetica Neue", Arial, sans-serif;
 }
-main { margin-bottom: 80px; }
+main { margin-bottom: 50px; }
 footer {
   position: absolute;
   right: 0;
@@ -111,6 +171,7 @@ footer {
   padding: 1rem;
   padding-top: 20px;
   background-color: #efefef;
+  font-size: 8.5px;
 }
 .fa:not(.fa-home) { 
   float: right; 
@@ -118,11 +179,39 @@ footer {
 }
 
 @media (min-width: 768px) {
-
+  header h1 {
+    font-size: 50px;
+    }
+    header p {
+        font-size: 18px;
+    }
+    .cards-container {
+      width: 65vw;
+    }
+    .card {
+        width: 60vw;
+    }
+    footer {
+      font-size: 12px;
+    }
 }
 
 @media (min-width: 992px){
-
+  header h1 {
+    font-size: 70px;
+    }
+    header p {
+        font-size: 25px;
+    }
+    .cards-container {
+      width: 50vw;
+    }
+    .card {
+        width: 45vw;
+    }
+    footer {
+      font-size: 14px;
+    }
 }
 
 

@@ -4,7 +4,7 @@ import {App, HomePage} from './App'; //import our component
 import TrumpQuotes from './Trump';
 import {Router, Route, hashHistory, IndexRoute} from 'react-router';
 import {AboutPage, ResourcesPage, ContactPage, DonatePage} from './About';
-import {AmendmentsPage, FundamentalRightsPage, CurrentBillsPage, LawyerPage, MythsPage} from './Laws';
+import {FundamentalRightsPage, CurrentBillsPage, LawyerPage, MythsPage} from './Laws';
 import {YoutubePage, TrafficPage, DoorPage, FAQPage} from './Procedures';
 //load our CSS file
 import './index.css';
@@ -20,7 +20,6 @@ ReactDOM.render(
       <Route path="resources" component={ResourcesPage} />
       <Route path="contact" component={ContactPage} />
       <Route path="donate" component={DonatePage} />
-      <Route path="amendments" component={AmendmentsPage} />
       <Route path="rights" component={FundamentalRightsPage} />
       <Route path="bills" component={CurrentBillsPage} />
       <Route path="lawyers" component={LawyerPage} />
