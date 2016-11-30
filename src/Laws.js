@@ -1,4 +1,6 @@
 import React from 'react';
+import Controller from './Controller';
+import shuffle from 'lodash/shuffle';
 
 class FundamentalRightsPage extends React.Component {
   render() {
@@ -35,11 +37,134 @@ class FundamentalRightsPage extends React.Component {
 }
 
 class CurrentBillsPage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      search:'',
+      bills: [],
+      page: 0
+    };
+
+    this.handleClickPrevious = this.handleClickPrevious.bind(this);
+    this.handleClickNext = this.handleClickNext.bind(this);
+    this.handleClickSearch = this.handleClickSearch.bind(this);
+  }
+
+  handleClickSearch(event) {
+    var thisComponent = this;
+    Controller.getSearchResults(thisComponent.state.search)
+      .then(function(data) {
+        console.log(data);
+        thisComponent.setState({
+          bills:data["objects"],
+          page: 0
+        })
+      })
+  }
+
+  componentWillMount() {
+    var thisComponent = this;
+    Controller.getCurrentLegislation()
+      .then(function(data) {
+        console.log(data);
+        thisComponent.setState({
+          bills:data["objects"],
+          page:0
+        })
+      })
+  }
+
+  handleChange(event) {
+    this.setState({
+      search:event.target.value
+    });
+  }
+
+  handleClickPrevious() {
+    
+  }
+
+  handleClickNext() {
+
+  }
+
   render() {
     return (
         <main>
           <h2>Current Bills and Votes</h2>
+          <div className='current-bills-main'>
+            <label htmlFor='searchBills'>Search Current Legislation: </label> {' '}
+            <input type='text' id='searchBills' name='search-bills' onChange={(e) => this.handleChange(e)}/>
+            <button onClick={this.handleClickSearch}> Submit </button>
+            <div>
+              <button onClick={this.handleClickPrev} className='page-through-button'> Previous </button>
+              <button onClick={this.handleClickNext} className='page-through-button'> Next </button>
+            </div>
+            <div className='current-bills-results'>
+              <BillCardCollection bills={this.state.bills}/>
+            </div>
+          </div>
         </main>
+    );
+  }
+}
+
+class BillCardCollection extends React.Component {
+  render() {
+    var cards = this.props.bills.map(function(currentBill, i) {
+      return <BillCard bill={currentBill} key={i} />
+    });
+    return (
+      <main>
+        {cards}
+      </main>
+    );
+  }
+}
+
+class BillCard extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state= {
+      side: 0
+    };
+  }
+
+sideOfCard() {
+  if (this.state.side === 0) {
+    return <BillCardFront bill={this.props.bill} />
+  } else {
+    return <BillCardBack bill={this.props.bill} />
+  }
+}
+
+  render() {
+    return (
+      <main>
+        {this.sideOfCard()}
+      </main>
+    );
+  }
+}
+
+class BillCardFront extends React.Component {
+  render() {
+    return (
+      <div>
+        <p>Bill Name Here</p>
+      </div>
+    );
+  }
+}
+
+class BillCardBack extends React.Component {
+  render() {
+    return (
+      <div>
+        <p>More Info Here</p>
+      </div>
     );
   }
 }

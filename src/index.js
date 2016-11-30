@@ -5,7 +5,7 @@ import TrumpQuotes from './Trump';
 import {Router, Route, hashHistory, IndexRoute} from 'react-router';
 import {AboutPage, ResourcesPage, ContactPage, DonatePage} from './About';
 import {FundamentalRightsPage, CurrentBillsPage, LawyerPage, MythsPage} from './Laws';
-import {YoutubePage, TrafficPage, DoorPage, FAQPage} from './Procedures';
+import {YoutubePage, TrafficPage, DoorPage, FAQPage, SenatorGuessPage} from './Procedures';
 //load our CSS file
 import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
@@ -22,6 +22,7 @@ ReactDOM.render(
       <Route path="donate" component={DonatePage} />
       <Route path="rights" component={FundamentalRightsPage} />
       <Route path="bills" component={CurrentBillsPage} />
+      <Route path="guess" component={SenatorGuessPage} />
       <Route path="lawyers" component={LawyerPage} />
       <Route path="myths" component={MythsPage} />
       <Route path="youtube" component={YoutubePage} />

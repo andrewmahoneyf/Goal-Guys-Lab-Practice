@@ -1,5 +1,16 @@
 import React from 'react';
 import FAQ from './FaqData';
+import Controller from './Controller';
+import _ from 'lodash';
+import senatorsData from './SenatorsData';
+
+var STATES = [
+  'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA',
+  'HI','ID','IL','IN','IA','KS','KY','LA','ME','MD',
+  'MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ',
+  'NM','NY','NC','ND','OH','OK','OR','PA','RI','SC',
+  'SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'
+];
 
 class YoutubePage extends React.Component {
   render() {
@@ -89,5 +100,105 @@ class Faq extends React.Component {
   }
 }
 
+class SenatorGuessPage extends React.Component {
+  constructor(props) {
+    super(props);
 
-export {YoutubePage, TrafficPage, DoorPage, FAQPage}; 
+    this.state = {
+      senators:[]
+    }
+  }
+
+  setUpGame() {
+    var thisComponent = this;
+    Controller.getCurrentSenators()
+      .then(function(data) {
+        console.log(data);
+        thisComponent.setState({
+          senators:data['objects']
+        })
+      });
+  }
+
+  componentDidMount() {
+    this.setUpGame();
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Senator Guessing Game</h2>
+        <SenatorGuess senators={senatorsData['objects']} />
+      </div>
+    );
+  }
+}
+
+class SenatorGuess extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      senatorsArray:[],
+      currentSenator:{}
+    }
+  }
+
+  pickSenator() {
+    var shuffledSenators = _.shuffle(this.props.senators);
+    console.log(shuffledSenators);
+    var current = shuffledSenators[0];
+    this.setState({
+      senatorsArray:shuffledSenators,
+      currentSenator:current
+    });
+  }
+
+  componentWillMount() {
+    this.pickSenator();
+  }
+
+  handleClick() {
+    this.pickSenator();
+  }
+
+  render() {
+
+    var makeButtons = function() {
+      var buttons = [];
+      buttons.push(this.state.currentSenator['state']);
+      var shuffledStates = _.shuffle(STATES);
+      for(var i=0; i < 3; i++) {
+        buttons.push(shuffledStates[i]);
+      }
+      buttons = _.shuffle(buttons);
+      console.log(buttons);
+      buttons.map(function(current) {
+        return <SenatorGuessStateButton onClickParent={this.handleClick} state={current} />
+      });
+    }
+
+    return (
+      <main>
+        <p>{console.log(this.state.currentSenator)}{this.state.currentSenator["person"]["firstname"]}</p>
+        <div className='state-buttons'>
+          {makeButtons}
+        </div>
+      </main>
+    );
+  }
+}
+
+class SenatorGuessStateButton extends React.Component {
+  render() {
+    return(
+      <div>
+      <button onClick={this.props.onClickParent}>
+        {this.props.state}
+      </button>
+      </div>
+    );
+  }
+}
+
+export {YoutubePage, TrafficPage, DoorPage, FAQPage, SenatorGuessPage}; 
