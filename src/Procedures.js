@@ -149,12 +149,12 @@ class SenatorGuessPage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="guessing-game-box">
         <h2>Senator Guessing Game</h2>
         <label htmlFor='searchSenator'>Enter Your Senator: </label>
         <input type='text' id='searchSenator' name='search-senator' />
 
-        <h3>Current Senator: {this.state.senatorName}</h3>
+        <h3 className="senator-name">Current Senator: {this.state.senatorName}</h3>
         {console.log(this.state.votingRecord)}
         <SenatorGuess votingRecord={this.state.votingRecord} />
       </div>
@@ -258,9 +258,9 @@ class SenatorGuess extends React.Component {
         </div>
           </div>
         </div>
-        <div className='yesno-buttons'>
-          <button onClick={this.handleYes}>Yes</button>
-          <button onClick={this.handleNo}>No</button>
+        <div className='yesno-buttons-box'>
+          <button className="yesno-buttons" onClick={this.handleYes}>Yes</button>
+          <button className="yesno-buttons" onClick={this.handleNo}>No</button>
         </div>
       </main>
     );
