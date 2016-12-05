@@ -30,6 +30,8 @@ var Controller = {
             return response.json();
          });
    },
+   
+
 }
 
 export default Controller;

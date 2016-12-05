@@ -76,7 +76,7 @@ class FAQPage extends React.Component {
     return (
         <main>
           <h2>FAQ</h2>
-          <p> If you have a question that is not already covered bellow feel free to ask and one of our lawyers will answer as soon as possible.</p>
+          <p> If you have a question that is not already covered below feel free to ask and one of our lawyers will answer as soon as possible.</p>
           <input type="text" id="textfield" placeholder="Enter question here.." onChange={this.handleTyping}/>
           <input type="submit" value="submit" onClick={this.handleClick}/>
           <br />
