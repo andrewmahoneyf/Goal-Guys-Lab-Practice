@@ -72,7 +72,7 @@ class ProcedureLinks extends React.Component {
       <NavDropdown eventKey={1} title="General Procedures" id="basic-nav-dropdown">
         <MenuItem eventKey={1.1}><Link to="/youtube">YouTube Guides</Link></MenuItem>
         <MenuItem eventKey={1.2}><Link to="/traffic">Traffic Stops</Link></MenuItem>
-        <MenuItem eventKey={1.3}><Link to="/door">At Your Door</Link></MenuItem>
+        <MenuItem eventKey={1.3}><Link to="/quiz">Legislator Knowledge</Link></MenuItem>
         <MenuItem eventKey={1.4}><Link to="/guess">Guess Senators</Link></MenuItem>
         <MenuItem divider />
         <MenuItem eventKey={1.3}><Link to="/faq">FAQ</Link></MenuItem>
