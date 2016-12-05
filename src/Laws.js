@@ -153,7 +153,7 @@ class BillCardFront extends React.Component {
   render() {
     return (
       <div>
-        <p>Bill Name Here</p>
+        <p>{this.props.bill['title']}</p>
       </div>
     );
   }
