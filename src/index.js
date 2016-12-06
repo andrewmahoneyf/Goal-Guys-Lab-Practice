@@ -6,6 +6,20 @@ import {Router, Route, hashHistory, IndexRoute} from 'react-router';
 import {AboutPage, ResourcesPage, ContactPage, DonatePage} from './About';
 import {FundamentalRightsPage, CurrentBillsPage, LawyerPage, MythsPage} from './Laws';
 import {YoutubePage, TrafficPage, DoorPage, FAQPage, SenatorGuessPage} from './Procedures';
+import {ForumPage} from './Forum';
+import firebase from 'firebase';
+
+<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAjzWH56bCQ-mACg0IMOPaIlsbKHns7B1g",
+    authDomain: "forum-goalguys.firebaseapp.com",
+    databaseURL: "https://forum-goalguys.firebaseio.com",
+    storageBucket: "forum-goalguys.appspot.com",
+    messagingSenderId: "697374876226"
+  };
+  firebase.initializeApp(config);
+
 //load our CSS file
 import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
@@ -29,6 +43,7 @@ ReactDOM.render(
       <Route path="traffic" component={TrafficPage} />
       <Route path="door" component={DoorPage} />
       <Route path="faq" component={FAQPage} />
+      <Route path="forum" component={ForumPage} />
     </Route>
   </Router>,
   document.getElementById('root')
