@@ -4,7 +4,6 @@ import './index.css'; //load CSS for this module
 import { Link, hashHistory } from 'react-router';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import {AboutPage} from './About';
-import {FundamentalRightsPage} from './Laws';
 
 
 class App extends React.Component {
@@ -57,7 +56,7 @@ class Navigation extends React.Component {
             <AboutLinks />
           </Nav>
           <Nav pullRight>
-            <NavItem id="forum" eventKey={4}><Link to="/forum" id="forum" activeClassName="activeLink">Forum</Link></NavItem>
+            <NavItem id="forum" eventKey={4}><Link to="/forum" id="forum">Forum</Link></NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -108,8 +107,57 @@ class HomePage extends React.Component {
   render() {
     return (
       <main className="container" id="adjust" >
+        <div className='mainCards-container'>
+          <div className="mainCard">
+            <Link to="/quiz">
+            <div className="mainContent">
+                Legislator Knowledge
+                <img src="https://portal.ehawaii.gov/assets/images/fed-government/legislative.jpg" alt="pentagon" />
+            </div>
+            </Link>
+          </div>
+          <div className="mainCard">
+            <Link to="/guess">
+            <div className="mainContent">
+                Guess Senators
+                <img src="https://static01.nyt.com/images/2013/04/19/us/19immig/19immig-jumbo.jpg" alt="pentagon" />
+            </div>
+            </Link>
+          </div>
+          <div className="mainCard">
+            <Link to="/trump">
+            <div className="mainContent">
+                Donald Trump
+                <img src="https://www.rawstory.com/wp-content/uploads/2016/02/Donald-Trump-Iowa-REUTERS-800x430.png" alt="pentagon" />
+            </div>
+            </Link>
+          </div>
+          <div className="mainCard">
+            <Link to="/rights">
+            <div className="mainContent">
+              Fundamental Rights
+              <img src="https://wilsonncteaparty.files.wordpress.com/2014/05/billofrights.jpg" alt="pentagon" />
+            </div>
+            </Link>
+          </div>
+          <div className="mainCard">
+            <Link to="/bills">
+            <div className="mainContent">
+              Current Bills and Votes
+              <img src="http://demlist.com/wp-content/uploads/2016/08/ballot.jpg" alt="pentagon" />
+            </div>
+            </Link>
+          </div>
+          <div className="mainCard">
+            <Link to="/myths">
+            <div className="mainContent">
+              Popular Myths
+              <img src="https://3.bp.blogspot.com/-AX1gFamMAgc/V4fceZK3wMI/AAAAAAAABmQ/n-h21TzbM9Q-ZOcqG3arKZqbLTqPB76tACLcB/s1600/myths%2B%25282%2529.jpg" alt="pentagon" />
+            </div>
+            </Link>
+          </div>
+        </div>
         <AboutPage />
-        <FundamentalRightsPage />
       </main>   
     );
   }

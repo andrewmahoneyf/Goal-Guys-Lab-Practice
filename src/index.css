@@ -86,7 +86,7 @@ header button {
     font-size: 22px;
     text-align: center;
     padding: 5px;
-    flex-basis: 33%;
+    flex-basis: 100%;
     margin-top: 1em;
     vertical-align: -webkit-baseline-middle;
 }
@@ -99,7 +99,41 @@ header button {
   padding: 8px 6px 0px 6px;
 }
 
-
+.mainCards-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1em -1em;
+}
+.mainCard {
+    font-size: 22px;
+    text-align: center;
+    padding: 0 20px 0 20px;
+    flex-basis: 100%;
+    margin-bottom: 1em;
+    vertical-align: -webkit-baseline-middle;
+}
+.mainContent {
+  border: 1px solid rgba(160, 160, 160, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+  height: 200px;
+  background-color:slateblue;
+  color: white;
+  padding-top: 10px;
+  overflow: hidden;
+  font-weight: bold;
+  opacity: 0.8;
+}
+.mainContent img {
+  max-height: 160px;
+  height: 160px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.mainContent:hover {
+    opacity: 1;
+}
 
 
 body::-webkit-scrollbar{ width: 1em;}
@@ -122,15 +156,18 @@ main h2 {
   color: darkslateblue;
   margin-top: 10px;
 }
+
 main h3 {
   font-weight: 400;
 }
+
 #emailInput {
   width: 200px;
   border-style: double;
   border-color: darkslateblue;
   padding-left: 4px;
 }
+
 #emailMessage {
   height: 220px;
   width: 403px;
@@ -141,10 +178,12 @@ main h3 {
   padding-left: 10px;
   font-size: 16pt;
 }
+
 #sendEmail {
   width: 403px;
   height: 40px;
 }
+
 #message {
   color: green;
   padding-left: 130px;
@@ -171,8 +210,18 @@ main h3 {
   text-decoration: none;
   font-weight: bold;
 }
-#forum:hover, #forum:focus {
-  color: white;
+
+.question-text {
+  font-size: 4rem;
+  padding-bottom: 20px;
+}
+
+#box {
+  display: none;
+}
+
+#true {
+  display: inline;
 }
 
 html {
@@ -180,8 +229,37 @@ html {
   box-sizing: border-box;
 }
 
-.bill-guess-game {
+.bill-name-button {
+  text-decoration: none;
+  padding: 15px;
+  background-color: cornflowerblue;
+  font-size: 4rem;
+  color: black;
+  border-radius: 5px;
+}
 
+a.bill-name-button:hover {
+  color: white;
+  text-decoration: none;
+  background-color: darkblue;
+}
+
+.game-alert-correct {
+  font-size: 2rem;
+  color: green;
+  font-weight: 3;
+}
+
+.divider {
+  background-color: black;
+  height: 1rem;
+  width: 100%;
+}
+
+.game-alert-incorrect {
+  font-size: 2rem;
+  color: red;
+  font-weight: 3;
 }
 
 .yesno-buttons-box {
@@ -191,6 +269,8 @@ html {
 .yesno-buttons {
   margin-left: 10px;
   margin-right: 10px;
+  margin-bottom: 10px;
+  margin-top: 15px;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 10px;
@@ -201,15 +281,42 @@ html {
   color: white;
   text-align: center;
   font-size: 16px;
+  border-radius: 5px;
+}
+
+.yesno-buttons:hover {
+  background-color: mediumpurple;
+  color: black;
 }
 
 .senator-name {
-  color: mediumpurple;
+  padding: 1rem;
+  color: rebeccapurple;
+  font-size: 4rem;
+}
+
+.search-state-label {
+  font-size: 3rem;
+  padding: 2rem;
+}
+
+#searchSenator.form-control {
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  height: 5rem;
 }
 
 .guessing-game-box {
   margin: 0 auto;
+  height: 75%;
   text-align: center;
+  background-color: lightgray;
+}
+
+.guessing-game-title {
+  padding: 4rem;
+  font-size: 6rem;
 }
 
 *, *:before, *:after { box-sizing: inherit; }
@@ -252,6 +359,9 @@ footer {
     footer {
       font-size: 12px;
     }
+    .mainCard, .billCard {
+      flex-basis: 50%;
+    }
 }
 
 @media (min-width: 992px){
@@ -269,6 +379,9 @@ footer {
     }
     footer {
       font-size: 14px;
+    }
+    .mainCard, .billCard {
+      flex-basis: 33%;
     }
 }
 
