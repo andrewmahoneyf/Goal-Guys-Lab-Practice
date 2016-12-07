@@ -1,16 +1,12 @@
 import React from 'react';
-import Modal from 'react-bootstrap';
 import Controller from './Controller';
 import _ from 'lodash';
-import senatorsData from './SenatorsData';
-import sampleVotingRecord from './sampleVotingRecord';
 
 //A class that handles showing a user a bill and having them guess whether or not a senator
 //from their state supported it.
 class SenatorGuessPage extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       stateName: '',
       senatorOneName: '',
@@ -21,7 +17,6 @@ class SenatorGuessPage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-
   //This function handles changes in the search bar as the user types.  It updates the stateName
   //state.
   handleChange(event) {
@@ -29,7 +24,6 @@ class SenatorGuessPage extends React.Component {
       stateName:event.target.value
     });
   }
-
   //This function handles the sumbit button for the search box.  The user enters their state and 
   //this function fetches all of the relevant data from the govtrack api.  It then updates the 
   //state to have this new information.
@@ -59,7 +53,6 @@ class SenatorGuessPage extends React.Component {
           })
       })
   }
-
   //This function determines whether the child should be rendered yet.  Before the user has searched for 
   //their senators, this child component should not be rendered.  After they have,it should then render.
   renderChild() {
@@ -69,7 +62,6 @@ class SenatorGuessPage extends React.Component {
       return <SenatorGuess senatorOneVotingRecord={this.state.senatorOneVotingRecord} senatorTwoVotingRecord={this.state.senatorTwoVotingRecord} />
     }
   }
-
   //This function determines whether or not the label for Senators should be displayed.  It should 
   //be displayed only after the user has entered their state and the system has retrieved the correct
   //senator names.
@@ -78,7 +70,6 @@ class SenatorGuessPage extends React.Component {
       return <h3 className="senator-name">Your Senators: {this.state.senatorOneName} and {this.state.senatorTwoName} </h3>;
     }
   }
-
   render() {
     return (
       <div className="guessing-game-box">
@@ -105,30 +96,25 @@ class SenatorGuessPage extends React.Component {
     );
   }
 }
-
 //This class handles the in-game displays and logic for an instance of the Senator Guessing Game
 class SenatorGuess extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       index: 0,
       votingRecords: [],
       currentRecord: {},
       gameState: 0
     };
-
     this.handleYes = this.handleYes.bind(this);
     this.handleNo = this.handleNo.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
     this.refreshPage = this.refreshPage.bind(this);
   }
-
   //A function called when the component first mounts.  It takes props from the parent 
   //performs some shuffling algorithms on these props to make an array of questions
   //to ask the user.
   componentWillMount() {
-    var thisComponent = this;
     var combinedVotingRecord = this.props.senatorOneVotingRecord;
     var length = this.props.senatorOneVotingRecord.length;
     for(var i = 0; i < length; i++) {
@@ -141,11 +127,9 @@ class SenatorGuess extends React.Component {
       currentRecord: combinedVotingRecord[0]
     });
   }
-
   //This function allows the user to completely reset the questions.  It reshuffles 
   //the array of questions it might ask and rerenders the component.
   refreshPage() {
-    var thisComponent = this;
     var combinedVotingRecord = this.props.senatorOneVotingRecord;
     var length = this.props.senatorOneVotingRecord.length;
     for(var i = 0; i < length; i++) {
@@ -159,7 +143,6 @@ class SenatorGuess extends React.Component {
       gameState: 0
     });
   }
-
   //This function handles incrementing the component to display the next question.  It updates the state
   //to track the next question.
   nextQuestion() {
@@ -171,7 +154,6 @@ class SenatorGuess extends React.Component {
       gameState: 0
     });
   }
-
   //This function handles the click of the Yes button for the users answer to whether or not they think
   //the senator voted for a particular bill.  It updates the state of the component so that a proper
   //message can be shown as feedback to the user.
@@ -186,7 +168,6 @@ class SenatorGuess extends React.Component {
       });
     }
   }
-
   //This function handles the click of the No button for the users answer to whether or not they think
   //the senator voted for a particular bill.  It updates the state of the component so that a proper
   //message can be shown as feedback to the user.
@@ -201,7 +182,6 @@ class SenatorGuess extends React.Component {
       })
     }
   }
-
   render() {
     var wonBox = 'box'; //these variables define conditional css rules for the messages shown when a user
     var lostBox = 'box'; //guesses either wrong or right
@@ -214,11 +194,21 @@ class SenatorGuess extends React.Component {
       <main className="bill-guess-game">
         <h4 className="question-text">How do you think {this.state.currentRecord["person"]["firstname"] + " " + this.state.currentRecord["person"]["lastname"]} voted on: </h4>
         <a className="bill-name-button" href={this.state.currentRecord["vote"]["link"]}>{this.state.currentRecord["vote"]["question"]}</a>
-
         <div className='yesno-buttons-box'>
           <button className="yesno-buttons" onClick={this.handleYes}>Yes</button>
           <button className="yesno-buttons" onClick={this.handleNo}>No</button>
         </div>
         <div id={wonBox} className='congrats-box'>
           <p className="game-alert-correct">Correct!</p>
-          <button className='yesno-buttons' onClick={this.n
+          <button className='yesno-buttons' onClick={this.nextQuestion}>Next Question?</button>
+        </div>
+        <div id={lostBox} className='failure-box'>
+          <p className="game-alert-incorrect">Incorrect!</p>
+          <button className='yesno-buttons' onClick={this.nextQuestion}>Next Question?</button>
+        </div>
+      <button className="yesno-buttons" onClick={this.refreshPage}>Reset Questions</button>
+      </main>
+    );
+  }
+}
+export default SenatorGuessPage; 
