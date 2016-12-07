@@ -30,8 +30,13 @@ var Controller = {
             return response.json();
          });
    },
-   
-
+   getSenatorVotingRecord: function(senatorId) {
+         return fetch('https://www.govtrack.us/api/v2/vote_voter/?person=400222&limit=10&order_by=-created&format=json&fields=vote__id,created,option__value,vote__category,vote__chamber,vote__question,vote__number')
+               .then(function(response) {
+                     console.log(response);
+                     return response.json();
+               });
+   },
 }
 
 export default Controller;

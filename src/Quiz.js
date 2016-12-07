@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import Qcontroller from './QuizController';
-import $ from 'jquery';
+// import $ from 'jquery';
 
 class QuizPage extends React.Component {
     constructor(props) {

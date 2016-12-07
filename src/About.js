@@ -86,7 +86,6 @@ class DonatePage extends React.Component {
   }
 }
 
-
 export default AboutPage;
 
 export { AboutPage, ResourcesPage, ContactPage, DonatePage };

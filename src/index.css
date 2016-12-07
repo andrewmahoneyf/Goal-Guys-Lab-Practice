@@ -154,6 +154,39 @@ html {
   height: 100%;
   box-sizing: border-box;
 }
+
+.bill-guess-game {
+
+}
+
+.yesno-buttons-box {
+  padding: 20px;
+}
+
+.yesno-buttons {
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: purple;
+  border-color: black;
+  border-width: 2px;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+}
+
+.senator-name {
+  color: mediumpurple;
+}
+
+.guessing-game-box {
+  margin: 0 auto;
+  text-align: center;
+}
+
 *, *:before, *:after { box-sizing: inherit; }
 body {
   position: relative;

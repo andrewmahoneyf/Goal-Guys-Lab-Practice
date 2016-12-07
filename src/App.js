@@ -103,7 +103,8 @@ class AboutLinks extends React.Component {
         <MenuItem eventKey={3.2}><Link to="/donate">Donate</Link></MenuItem>
         <MenuItem eventKey={3.3}><Link to="/resources">Resources</Link></MenuItem>
         <MenuItem divider />
-        <MenuItem eventKey={3.4}><Link to="/contact">Contact Us</Link></MenuItem>
+        <MenuItem eventKey={3.4}><Link to="/forum">Forum</Link></MenuItem>
+        <MenuItem eventKey={3.5}><Link to="/contact">Contact Us</Link></MenuItem>
       </NavDropdown>
     );
   }
