@@ -13,8 +13,8 @@ class App extends React.Component {
       <div>
         <header className="well">
           <div className="container" role="banner" >
-            <h1>Know Your Rights</h1>
-            <p>Be prepared for your next police encounter</p>
+            <h1>Stay Informed</h1>
+            <p>Educate yourself on laws and officials before your next vote</p>
           </div>
         </header>
 
@@ -55,10 +55,9 @@ class Navigation extends React.Component {
             <OfficialsLinks />
             <LawLinks />
             <AboutLinks />
-            <NavItem id="trump" eventKey={4}><Link to="/trump" id="trump" activeClassName="activeLink">Trump Quotes</Link></NavItem>
           </Nav>
           <Nav pullRight>
-            <NavItem id="forum" eventKey={5}><Link to="/forum" id="forum" activeClassName="activeLink">Forum</Link></NavItem>
+            <NavItem id="forum" eventKey={4}><Link to="/forum" id="forum" activeClassName="activeLink">Forum</Link></NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -72,6 +71,7 @@ class OfficialsLinks extends React.Component {
       <NavDropdown eventKey={1} title="Elected Officials" id="basic-nav-dropdown">
         <MenuItem eventKey={1.1}><Link to="/quiz">Legislator Knowledge</Link></MenuItem>
         <MenuItem eventKey={1.2}><Link to="/guess">Guess Senators</Link></MenuItem>
+        <MenuItem eventKey={1.3}><Link to="/trump">Donald Trump</Link></MenuItem>
       </NavDropdown>
     );
   }
@@ -85,7 +85,7 @@ class LawLinks extends React.Component {
         <MenuItem eventKey={2.2}><Link to="/bills">Current Bills and Votes</Link></MenuItem>
         <MenuItem eventKey={2.3}><Link to="/myths">Popular Myths</Link></MenuItem>
         <MenuItem divider />
-        <MenuItem eventKey={1.5}><Link to="/faq">FAQ</Link></MenuItem>
+        <MenuItem eventKey={2.4}><Link to="/faq">FAQ</Link></MenuItem>
       </NavDropdown>
     );
   }
@@ -98,7 +98,7 @@ class AboutLinks extends React.Component {
         <MenuItem eventKey={3.1}><Link to="/about">About Us</Link></MenuItem>
         <MenuItem eventKey={3.2}><Link to="/resources">Resources</Link></MenuItem>
         <MenuItem divider />
-        <MenuItem eventKey={3.5}><Link to="/contact">Contact Us</Link></MenuItem>
+        <MenuItem eventKey={3.3}><Link to="/contact">Contact Us</Link></MenuItem>
       </NavDropdown>
     );
   }
