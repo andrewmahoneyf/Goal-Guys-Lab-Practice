@@ -7,6 +7,18 @@ import { AboutPage, ResourcesPage, ContactPage, DonatePage } from './About';
 import { FundamentalRightsPage, CurrentBillsPage, LawyerPage, MythsPage } from './Laws';
 import { YoutubePage, TrafficPage, DoorPage, FAQPage, SenatorGuessPage } from './Procedures';
 import { QuizPage } from './Quiz';
+import { ForumPage } from './Forum';
+import firebase from 'firebase';
+
+<script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+  var config = {
+    apiKey: "AIzaSyAjzWH56bCQ-mACg0IMOPaIlsbKHns7B1g",
+    authDomain: "forum-goalguys.firebaseapp.com",
+    databaseURL: "https://forum-goalguys.firebaseio.com",
+    storageBucket: "forum-goalguys.appspot.com",
+    messagingSenderId: "697374876226"
+  };
+  firebase.initializeApp(config);
 
 //load our CSS file
 import './index.css';
@@ -31,6 +43,7 @@ ReactDOM.render(
       <Route path="traffic" component={TrafficPage} />
       <Route path="quiz" component={QuizPage} />
       <Route path="faq" component={FAQPage} />
+      <Route path="forum" component={ForumPage} />
     </Route>
   </Router>,
   document.getElementById('root')
