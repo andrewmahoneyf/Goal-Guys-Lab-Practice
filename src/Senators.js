@@ -6,11 +6,11 @@ import senatorsData from './SenatorsData';
 import sampleVotingRecord from './sampleVotingRecord';
 
 var STATES = [
-  'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA',
-  'HI','ID','IL','IN','IA','KS','KY','LA','ME','MD',
-  'MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ',
-  'NM','NY','NC','ND','OH','OK','OR','PA','RI','SC',
-  'SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'
+  'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
+  'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+  'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+  'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+  'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
 ];
 
 //Show user a bill and have them guess whether or not a particular senator supported it.
@@ -40,7 +40,7 @@ class SenatorGuessPage extends React.Component {
   componentWillMount() {
     //this.setUpGame();
     Controller.getSenatorVotingRecord('400222')
-      .then(function(data) {
+      .then(function (data) {
         console.log(data);
         /*thisComponent.setState({
           vorintRecord: data["objects"]
@@ -118,7 +118,7 @@ class SenatorGuess extends React.Component {
   }
 
   handleYes(event) {
-    if(this.state.vote === "Yea") {
+    if (this.state.vote === "Yea") {
       console.log("correct");
     } else {
       console.log("incorrect");
@@ -127,7 +127,7 @@ class SenatorGuess extends React.Component {
   }
 
   handleNo(event) {
-    if(this.state.vote === "Nea") {
+    if (this.state.vote === "Nea") {
       console.log("correct");
     } else {
       console.log("incorrect");
@@ -163,10 +163,10 @@ class SenatorGuess extends React.Component {
                 <button type="button" className="close" data-dismiss="modal">&times;</button>
                 <h4 className="modal-title">You got it right!</h4>
               </div>
-          <div className="modal-body">
-            <p>Mark Kirk voted {this.state.vote}</p>
-          </div>
-        </div>
+              <div className="modal-body">
+                <p>Mark Kirk voted {this.state.vote}</p>
+              </div>
+            </div>
           </div>
         </div>
         <div className='yesno-buttons-box'>

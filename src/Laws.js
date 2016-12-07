@@ -1,6 +1,5 @@
 import React from 'react';
 import Controller from './Controller';
-import shuffle from 'lodash/shuffle';
 import FAQ from './FaqData';
 
 
@@ -149,9 +148,6 @@ class BillCardCollection extends React.Component {
 }
 
 class BillCard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div className="billCard">

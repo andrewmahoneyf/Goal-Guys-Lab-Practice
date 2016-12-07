@@ -23,18 +23,16 @@ var Controller = {
             return response.json();
          })
    },
-   getCurrentSenators: function() {
-      return fetch('https://www.govtrack.us/api/v2/role?current=true&role_type=senator')
+   getCurrentSenators: function(state) {
+      return fetch('https://www.govtrack.us/api/v2/role?current=true&role_type=senator&state=' + state)
          .then(function(response) {
-            console.log(response);
             return response.json();
          });
    },
    getSenatorVotingRecord: function(senatorId) {
-         return fetch('https://www.govtrack.us/api/v2/vote_voter/?person=400222&limit=10&order_by=-created&format=json&fields=vote__id,created,option__value,vote__category,vote__chamber,vote__question,vote__number')
+         return fetch('https://www.govtrack.us/api/v2/vote_voter/?person=' + senatorId + '&limit=25&order_by=-created&format=json')
                .then(function(response) {
-                     console.log(response);
-                     return response.json();
+                  return response.json();
                });
    },
 }
