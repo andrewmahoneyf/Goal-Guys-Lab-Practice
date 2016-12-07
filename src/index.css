@@ -236,6 +236,16 @@ footer {
   padding-right: 8px;
 }
 
+.message-box {
+	border-bottom:2px solid slategrey;
+	padding: 25px;
+	margin-left:100px;
+	margin-right:100px;
+	background-color: darkslateblue;
+}
+
+
+
 @media (min-width: 768px) {
   header h1 {
     font-size: 50px;
