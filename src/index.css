@@ -141,10 +141,12 @@ main h3 {
   padding: 50px 50px 0 0;
 }
 
-#trump {
+#trump, #forum {
   color: grey;
-  font-weight: bold;
   text-decoration: none;
+}
+#forum {
+  font-weight: bold;
 }
 #trump:hover, #trump:active {
   color: white;

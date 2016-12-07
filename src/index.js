@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { App, HomePage } from './App'; //import our component
-import TrumpQuotes from './Trump';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import { App, HomePage } from './App'; //import our component
 import { AboutPage, ResourcesPage, ContactPage } from './About';
-import { FundamentalRightsPage, CurrentBillsPage, LawyerPage, MythsPage } from './Laws';
-import { FAQPage, SenatorGuessPage } from './Procedures';
+import { FundamentalRightsPage, CurrentBillsPage, MythsPage, FAQPage } from './Laws';
+import TrumpQuotes from './Trump';
+import SenatorGuessPage from './Senators';
 import { QuizPage } from './Quiz';
 import ForumPage from './Forum';
 import firebase from 'firebase';
@@ -36,7 +36,6 @@ ReactDOM.render(
       <Route path="rights" component={FundamentalRightsPage} />
       <Route path="bills" component={CurrentBillsPage} />
       <Route path="guess" component={SenatorGuessPage} />
-      <Route path="lawyers" component={LawyerPage} />
       <Route path="myths" component={MythsPage} />
       <Route path="quiz" component={QuizPage} />
       <Route path="faq" component={FAQPage} />
