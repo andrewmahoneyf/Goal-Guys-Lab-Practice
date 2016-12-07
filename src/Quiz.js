@@ -224,6 +224,4 @@ class QuizCont extends React.Component {
         )
     }
 }
-
-
 export { QuizPage };

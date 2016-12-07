@@ -2,6 +2,7 @@ import React from 'react';
 import firebase from 'firebase';
 // import Time from 'react-time';
 
+
 class ForumPage extends React.Component {
     constructor(props) {
         super(props);
@@ -61,7 +62,7 @@ class ForumPage extends React.Component {
                 <header className="container-fluid">
                     {this.state.userId &&
                         <div className="logout">
-                            <button className="btn btn-warning" onClick={() => this.signOut()}>Sign Out {firebase.auth().currentUser.username}</button>
+                            <button className="btn btn-default" onClick={() => this.signOut()}>Sign Out {firebase.auth().currentUser.username}</button>
                         </div>
                     }
                 </header> 
@@ -72,14 +73,14 @@ class ForumPage extends React.Component {
                 </main>
             </div>
         );
-    }
-}
+    } 
+} 
 
 
 class Messages extends React.Component {
-    constructor(props) {
+   constructor(props) {
         super(props);
-        this.state = {post: ''};
+        this.state = {post:''};
     }
 
     updatePost(event) {
@@ -89,13 +90,13 @@ class Messages extends React.Component {
     postMessage(event) {
         event.preventDefault();
 
-        var messages = firebase.database().ref('message');
+        var messagesRef = firebase.database().ref('message');
         var newMessage = {
             text: this.state.post,
             userId: firebase.auth().currentUser.uid
            // time: firebase.database.ServerValue.TIMESTAMP
         };
-        messages.push(newMessage);
+        messagesRef.push(newMessage);
 
         this.setState({post:''});
     }
@@ -110,15 +111,16 @@ class Messages extends React.Component {
                 <form className="message-input" role="form">
                     <textarea name="text" value={this.state.post} className="form-control" onChange={(e) => this.updatePost(e)}></textarea>
                     <div className="form-group send-message">
-                        <button className="btn btn-primary"
+                        <button className="btn btn-default"
                             disabled={this.state.post.length === 0}
                             onClick={(e) => this.postMessage(e)}>
+                                Post
                         </button>
                     </div>
                 </form>
             </div>
         );
-    }
+    } 
 }
 
 class PostedMessages extends React.Component {
@@ -133,16 +135,16 @@ class PostedMessages extends React.Component {
             this.setState({users:snapshot.val()});
         });
 
-        var messages = firebase.database().ref('message');
-        messages.on('value', (snapshot) => {
+        var messagesRef = firebase.database().ref('message');
+        messagesRef.on('value', (snapshot) => {
             var messageList = [];
             snapshot.forEach(function(item) {
                 var singleMessage = item.val();
                 singleMessage.key = item.key;
                 messageList.push(singleMessage);
             });
-            messageList.sor((a,b) => b.time - a.time);
-            this.setState({messagePosts: messageList});
+            messageList.sort((a,b) => b.time - a.time);
+            this.setState({messages: messageList});
         });
     }
 
@@ -152,7 +154,7 @@ class PostedMessages extends React.Component {
     }
 
     render() {
-        if(!this.state.users) {
+        if(!this.state.user) { //this.state.users
             return null;
         }
 
@@ -180,7 +182,6 @@ class MessageItem extends React.Component {
         messageFavorite.set(favorite)
     }
 
-       //             <span className="time"><Time value={this.props.singleMessage.time} relative/></span>
     render() {
         var favorited = false;
         var numFavorites = 0;
@@ -194,7 +195,7 @@ class MessageItem extends React.Component {
             <div className="message-box">
                 <div>
                     <span className="username">{this.props.user.username}</span>
-
+                    <p> hi </p>
                 </div>
                 <div className="singleMessage">{this.props.singleMessage.text}</div>
                 <div className="favorites">
@@ -206,7 +207,7 @@ class MessageItem extends React.Component {
     }
 }
 
-MessageItem.propTypes = {
+ MessageItem.propTypes = {
     singleMessage: React.PropTypes.object.isRequired,
     user: React.PropTypes.object.isRequired,
 }; 
@@ -294,13 +295,13 @@ class SignUpForm extends React.Component {
                 </div>
             </form>
         )
-    }
+    } 
 }
 
 SignUpForm.propTypes = {
     signUpCallback: React.PropTypes.func.isRequired,
     signInCallback: React.PropTypes.func.isRequired
-};
+}; 
 
 class ValidatedInput extends React.Component {
     render() {
@@ -311,7 +312,7 @@ class ValidatedInput extends React.Component {
                 <ValidationErrors errors={this.props.errors} />
             </div>
         );
-    }
+    } 
 }
 
 class ValidationErrors extends React.Component {
@@ -322,13 +323,13 @@ class ValidationErrors extends React.Component {
                     <p className="help-block">Required!</p>
                 }
                 {this.props.errors.email &&
-                    <p className="help-block">Not an email address!</p>
+                    <p className="help-block">Not a valid email address!</p>
                 }
                 {this.props.errors.minLength &&
                     <p className="help-block">Must be at least {this.props.errors.minLength} characters.</p>        
                 }
             </div>
         );
-    }
+    } 
 }
 export default ForumPage;
