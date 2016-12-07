@@ -71,10 +71,8 @@ class ProcedureLinks extends React.Component {
   render() {
     return (
       <NavDropdown eventKey={1} title="General Procedures" id="basic-nav-dropdown">
-        <MenuItem eventKey={1.1}><Link to="/youtube">YouTube Guides</Link></MenuItem>
-        <MenuItem eventKey={1.2}><Link to="/traffic">Traffic Stops</Link></MenuItem>
-        <MenuItem eventKey={1.3}><Link to="/quiz">Legislator Knowledge</Link></MenuItem>
-        <MenuItem eventKey={1.4}><Link to="/guess">Guess Senators</Link></MenuItem>
+        <MenuItem eventKey={1.1}><Link to="/quiz">Legislator Knowledge</Link></MenuItem>
+        <MenuItem eventKey={1.2}><Link to="/guess">Guess Senators</Link></MenuItem>
         <MenuItem divider />
         <MenuItem eventKey={1.5}><Link to="/faq">FAQ</Link></MenuItem>
       </NavDropdown>
@@ -100,10 +98,9 @@ class AboutLinks extends React.Component {
     return (
       <NavDropdown eventKey={3} title="About" id="basic-nav-dropdown">
         <MenuItem eventKey={3.1}><Link to="/about">About Us</Link></MenuItem>
-        <MenuItem eventKey={3.2}><Link to="/donate">Donate</Link></MenuItem>
-        <MenuItem eventKey={3.3}><Link to="/resources">Resources</Link></MenuItem>
-        <MenuItem divider />
+        <MenuItem eventKey={3.2}><Link to="/resources">Resources</Link></MenuItem>
         <MenuItem eventKey={3.4}><Link to="/forum">Forum</Link></MenuItem>
+        <MenuItem divider />
         <MenuItem eventKey={3.5}><Link to="/contact">Contact Us</Link></MenuItem>
       </NavDropdown>
     );
@@ -115,7 +112,6 @@ class HomePage extends React.Component {
     return (
       <main className="container" id="adjust" >
         <AboutPage />
-        <YoutubePage/>
         <FundamentalRightsPage />
       </main>   
     );

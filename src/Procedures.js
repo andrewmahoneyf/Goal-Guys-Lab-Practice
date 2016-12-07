@@ -14,35 +14,6 @@ var STATES = [
   'SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'
 ];
 
-class YoutubePage extends React.Component {
-  render() {
-    return (
-        <main>
-          <h2>General Procedure Video Guides</h2>
-        </main>
-    );
-  }
-}
-
-class TrafficPage extends React.Component {
-  render() {
-    return (
-        <main>
-          <h2>Traffic Stops</h2>
-        </main>
-    );
-  }
-}
-
-class DoorPage extends React.Component {
-  render() {
-    return (
-        <main>
-          <h2>Police Encounters at Your House</h2>
-        </main>
-    );
-  }
-}
 
 class FAQPage extends React.Component {
     constructor(props){
@@ -267,4 +238,4 @@ class SenatorGuess extends React.Component {
   }
 }
 
-export {YoutubePage, TrafficPage, DoorPage, FAQPage, SenatorGuessPage}; 
+export {FAQPage, SenatorGuessPage}; 
