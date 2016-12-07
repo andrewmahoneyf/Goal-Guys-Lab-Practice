@@ -44,7 +44,7 @@ class QuizPage extends React.Component {
                     <h2>Test How Well You Know Your Legislators!</h2>
                     <p> To get started, please enter your zipcode </p>
                     <SearchForm fetchData={this.fetchData} />
-                    <QuizControl legislatorInfo={this.state.legislatorInfo} />
+                    <Quiz legislatorInfo={this.state.legislatorInfo} />
                 </main>
             </div>
         );
@@ -54,7 +54,6 @@ class QuizPage extends React.Component {
 class Quiz extends React.Component {
     render() {
         return (
-            <body>
                 <div id='container'>
                     <br />
                     <div id='quiz'></div>
@@ -62,7 +61,6 @@ class Quiz extends React.Component {
                     <div class='button' id='prev'><a href='#'>Prev</a></div>
                     <div class='button' id='start'> <a href='#'>Start Over</a></div>
                 </div >
-            </body >
         );
     }
 }
