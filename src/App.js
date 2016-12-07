@@ -5,7 +5,7 @@ import { Link, hashHistory } from 'react-router';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import {AboutPage} from './About';
 
-
+//Main app layout
 class App extends React.Component {
   render() {
     return (
@@ -39,6 +39,7 @@ class App extends React.Component {
   }
 }
 
+// React-Bootstrap horizonal navagation bar 
 class Navigation extends React.Component {
   render() {
     return (
@@ -64,6 +65,7 @@ class Navigation extends React.Component {
   }
 }
 
+// Links on first Nav dropdown
 class OfficialsLinks extends React.Component {
   render() {
     return (
@@ -76,6 +78,7 @@ class OfficialsLinks extends React.Component {
   }
 }
 
+// Links on second Nav dropdown
 class LawLinks extends React.Component {
   render() {
     return (
@@ -90,6 +93,7 @@ class LawLinks extends React.Component {
   }
 }
 
+// Links on third Nav dropdown
 class AboutLinks extends React.Component {
   render() {
     return (
@@ -103,6 +107,7 @@ class AboutLinks extends React.Component {
   }
 }
 
+// Component for homepage layout with link cards and about us
 class HomePage extends React.Component {
   render() {
     return (

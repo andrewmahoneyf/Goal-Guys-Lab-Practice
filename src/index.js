@@ -10,6 +10,7 @@ import { QuizPage } from './Quiz';
 import ForumPage from './Forum';
 import firebase from 'firebase';
 
+// initialize firebase
 <script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
   var config = {
     apiKey: "AIzaSyAjzWH56bCQ-mACg0IMOPaIlsbKHns7B1g",

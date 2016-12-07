@@ -253,6 +253,7 @@ class FAQPage extends React.Component {
   }
 }
 
+// This component handles question and answer for each faq
 class Faq extends React.Component {
   render() {
     var faq = this.props.faq;

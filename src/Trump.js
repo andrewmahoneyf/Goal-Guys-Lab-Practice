@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Carousel } from 'react-bootstrap';
 import _ from 'lodash';
 
-
+// Array of gif images for each card
 var DT_IMAGES = [
   { img: 'https://img.washingtonpost.com/blogs/the-fix/files/2016/04/Nah.gif' },
   { img: 'https://fsmedia.imgix.net/14/a6/41/40/86da/4131/8920/0caca6f1d561/tech-and-trump-just-dont-get-along.gif?rect=0,23,360,180&dpr=2&auto=format&q=75' },
@@ -27,6 +27,7 @@ var DT_IMAGES = [
   { img: 'http://images.complex.com/complex/image/upload/giphy_39_pn5gex.gif' }
 ];
 
+// Controller to fetch data from trump api
 var controller = {
   search: function (searchQuery) {
     var uri = 'https://api.whatdoestrumpthink.com/api/v1/quotes';
@@ -42,6 +43,7 @@ var controller = {
   },
 };
 
+// fetches data and passes quotes object to QuoteList
 class TrumpQuotes extends React.Component {
   constructor(props) {
     super(props);
@@ -66,6 +68,7 @@ class TrumpQuotes extends React.Component {
   }
 }
 
+// maps quotes and creates Carousel container with list of quote cards
 class QuoteList extends React.Component {
   render() {
     var quoteResults = this.props.quotes.map(function (message) {
@@ -86,6 +89,7 @@ class QuoteList extends React.Component {
   }
 }
 
+// handles individual quote card with random generated image and a quote
 class Quote extends React.Component {
   render() {
     var message = this.props.quoteCard
