@@ -1,7 +1,5 @@
 import React from 'react';
 import firebase from 'firebase';
-// import Time from 'react-time';
-
 
 class ForumPage extends React.Component {
     constructor(props) {
@@ -12,10 +10,8 @@ class ForumPage extends React.Component {
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if(user) {
-                // console.log('Auth state changed: logged in as', user.email);
                 this.setState({userId:user.uid});
             } else {
-                // console.log('Auth state changed: logged out');
                 this.setState({userId: null});
             }
         })
@@ -51,9 +47,9 @@ class ForumPage extends React.Component {
     render() {
         var content = null;
 
-        if(!this.state.userId) {
+        if(!this.state.userId) { // if the user isn't signed in
             content = <SignUpForm signUpCallback={this.signUp} signInCallback={this.signIn} />;
-        } else {
+        } else { // if the user is signed in
             content = (<div><Messages /><PostedMessages /></div>);
         }
 
@@ -66,7 +62,7 @@ class ForumPage extends React.Component {
                         </div>
                     }
                 </header> 
-                <h2>Forum</h2>
+                <h2>Share Your Thoughts</h2>
 
                 <main className="container">
                     {content}
@@ -76,7 +72,7 @@ class ForumPage extends React.Component {
     } 
 } 
 
-
+// keeps track of message box
 class Messages extends React.Component {
    constructor(props) {
         super(props);
@@ -90,23 +86,22 @@ class Messages extends React.Component {
     postMessage(event) {
         event.preventDefault();
 
-        var messagesRef = firebase.database().ref('message');
-        var newMessage = {
+        var messagesRef = firebase.database().ref('message'); // adds this element into JOITC
+        var newMessage = { // creates the message with its fields
             text: this.state.post,
             userId: firebase.auth().currentUser.uid
            // time: firebase.database.ServerValue.TIMESTAMP
         };
-        messagesRef.push(newMessage);
+        messagesRef.push(newMessage); // adds the message into the JOITC
 
-        this.setState({post:''});
+        this.setState({post:''}); // resets the state
     }
 
     render() {
-        var currentUser = firebase.auth().currentUser;
+        var currentUser = firebase.auth().currentUser; // get all data from current user
 
         return (
             <div className="message-box write-message">
-                <p className="username">{currentUser.username}</p>
 
                 <form className="message-input" role="form">
                     <textarea name="text" value={this.state.post} className="form-control" onChange={(e) => this.updatePost(e)}></textarea>
@@ -123,19 +118,20 @@ class Messages extends React.Component {
     } 
 }
 
+// keeps track of messages that have been posted
 class PostedMessages extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {messages: []};
+        this.state = {messages: []}; // an array of messages to be posted
     }
 
     componentDidMount() {
-        var users = firebase.database().ref('users');
+        var users = firebase.database().ref('users'); // refer to user element in JOITC
         users.on('value', (snapshot) => {
             this.setState({users:snapshot.val()});
         });
 
-        var messagesRef = firebase.database().ref('message');
+        var messagesRef = firebase.database().ref('message'); // refer to message element in JOITC
         messagesRef.on('value', (snapshot) => {
             var messageList = [];
             snapshot.forEach(function(item) {
@@ -154,8 +150,8 @@ class PostedMessages extends React.Component {
     }
 
     render() {
-        if(!this.state.user) { //this.state.users
-            return null;
+        if(!this.state.users) { // if there is no user data, there are no messages
+           return null;
         }
 
         var messageObjects = this.state.messages.map((singleMessage) => {
@@ -168,6 +164,7 @@ class PostedMessages extends React.Component {
     }
 }
 
+// keeps track of the data for a single message
 class MessageItem extends React.Component {
     favoriteMessage() {
         var messageFavorite = firebase.database().ref('messages/'+this.props.singleMessage.key+'/favorites');
@@ -195,7 +192,6 @@ class MessageItem extends React.Component {
             <div className="message-box">
                 <div>
                     <span className="username">{this.props.user.username}</span>
-                    <p> hi </p>
                 </div>
                 <div className="singleMessage">{this.props.singleMessage.text}</div>
                 <div className="favorites">
@@ -212,6 +208,7 @@ class MessageItem extends React.Component {
     user: React.PropTypes.object.isRequired,
 }; 
 
+// creates a sign up form that asks for email, password and username
 class SignUpForm extends React.Component {
     constructor(props) {
         super(props);
@@ -243,6 +240,7 @@ class SignUpForm extends React.Component {
         this.props.signInCallback(this.state.email, this.state.password);
     }
 
+    // tracks whether or not the user
     validate(value, validations) {
         var errors = {isValid: true, style:''};
 
@@ -278,7 +276,7 @@ class SignUpForm extends React.Component {
 
     render() {
         var emailErrors = this.validate(this.state.email, {required:true, email:true});
-        var passwordErrors = this.validate(this.state.password, {required:true, minLength:6});
+        var passwordErrors = this.validate(this.state.password, {required:true, minLength:5});
         var usernameErrors = this.validate(this.state.username, {required:true, minLength:3});
 
         var signUpEnabled = (emailErrors.isValid && passwordErrors.isValid && passwordErrors.isValid);
@@ -315,6 +313,7 @@ class ValidatedInput extends React.Component {
     } 
 }
 
+// shows error messages when things are input incorrectly
 class ValidationErrors extends React.Component {
     render() {
         return (
