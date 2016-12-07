@@ -6,14 +6,6 @@ import _ from 'lodash';
 import senatorsData from './SenatorsData';
 import sampleVotingRecord from './sampleVotingRecord';
 
-var STATES = [
-  'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA',
-  'HI','ID','IL','IN','IA','KS','KY','LA','ME','MD',
-  'MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ',
-  'NM','NY','NC','ND','OH','OK','OR','PA','RI','SC',
-  'SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'
-];
-
 class YoutubePage extends React.Component {
   render() {
     return (
@@ -102,166 +94,231 @@ class Faq extends React.Component {
   }
 }
 
-//Show user a bill and have them guess whether or not a particular senator supported it.
+//A class that handles showing a user a bill and having them guess whether or not a senator
+//from their state supported it.
 class SenatorGuessPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      usState: '',
-      senatorName: '',
-      senatorId: '',
-      votingRecord: []
+      stateName: '',
+      senatorOneName: '',
+      senatorOneId: '',
+      senatorTwoName: '',
+      senatorTwoId: '',
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  setUpGame() {
-    /*var thisComponent = this;
-    Controller.getCurrentSenators()
-      .then(function(data) {
-        console.log(data);
-        thisComponent.setState({
-          senators:data['objects']
-        })
-      });*/
-  }
-
-  componentWillMount() {
-    //this.setUpGame();
-    Controller.getSenatorVotingRecord('400222')
-      .then(function(data) {
-        console.log(data);
-        /*thisComponent.setState({
-          vorintRecord: data["objects"]
-        })*/
-      })
+  //This function handles changes in the search bar as the user types.  It updates the stateName
+  //state.
+  handleChange(event) {
     this.setState({
-      usState: 'Washington',
-      senatorName: 'Mark Kirk',
-      senatorId: '400222',
-      votingRecord: sampleVotingRecord['objects']
+      stateName:event.target.value
     });
   }
 
-  handleChange(event) {
+  //This function handles the sumbit button for the search box.  The user enters their state and 
+  //this function fetches all of the relevant data from the govtrack api.  It then updates the 
+  //state to have this new information.
+  handleSubmit(event) {
+    var thisComponent = this;
+    Controller.getCurrentSenators(this.state.stateName) 
+      .then(function(data) {
+        var voterOne = [];
+        var voterTwo = [];
+        Controller.getSenatorVotingRecord(data["objects"][0]["person"]["id"])
+          .then(function(dataOne) {
+            voterOne = dataOne["objects"];
+          })
+          .then(function() {
+            Controller.getSenatorVotingRecord(data["objects"][1]["person"]["id"])
+              .then(function(dataTwo) {
+                voterTwo = dataTwo["objects"];
+                thisComponent.setState({
+                  senatorOneName: (data["objects"][0]["person"]["firstname"] + " " + data["objects"][0]["person"]["lastname"]),
+                  senatorOneId: (data["objects"][0]["person"]["id"]),
+                  senatorOneVotingRecord: voterOne,
+                  senatorTwoName: (data["objects"][1]["person"]["firstname"] + " " + data["objects"][1]["person"]["lastname"]),
+                  senatorTwoId: (data["objects"][1]["person"]["id"]),
+                  senatorTwoVotingRecord: voterTwo
+                })
+              })
+          })
+      })
+  }
 
+  //This function determines whether the child should be rendered yet.  Before the user has searched for 
+  //their senators, this child component should not be rendered.  After they have,it should then render.
+  renderChild() {
+    if (this.state.senatorOneId === '' || this.state.senatorTwoId === '') {
+      return <div></div>;
+    } else {
+      return <SenatorGuess senatorOneVotingRecord={this.state.senatorOneVotingRecord} senatorTwoVotingRecord={this.state.senatorTwoVotingRecord} />
+    }
+  }
+
+  //This function determines whether or not the label for Senators should be displayed.  It should 
+  //be displayed only after the user has entered their state and the system has retrieved the correct
+  //senator names.
+  nameLabel() {
+    if (this.state.senatorOneName !== '') {
+      return <h3 className="senator-name">Your Senators: {this.state.senatorOneName} and {this.state.senatorTwoName} </h3>;
+    }
   }
 
   render() {
     return (
       <div className="guessing-game-box">
-        <h2>Senator Guessing Game</h2>
-        <label htmlFor='searchSenator'>Enter Your Senator: </label>
-        <input type='text' id='searchSenator' name='search-senator' />
-
-        <h3 className="senator-name">Current Senator: {this.state.senatorName}</h3>
-        {console.log(this.state.votingRecord)}
-        <SenatorGuess votingRecord={this.state.votingRecord} />
+        <h2 className="guessing-game-title">Do You Know Your Senators' Voting History?</h2>
+        <div id="midpage">
+        </div>
+        <div className="form-group">
+          <div>
+            <label htmlFor='searchSenator' className="search-state-label">Enter Your State Code to Begin: </label>
+          </div>
+          <div>
+            <input type='text' id='searchSenator' placeholder="Example: WA, CA, etc." className="form-control" name='search-senator' onChange={(e) => this.handleChange(e)}/>
+          </div>
+          <div>
+            <button className="yesno-buttons" onClick={(e)=>this.handleSubmit(e)}>SEARCH</button>
+          </div>
+        </div>
+        <div className="divider">
+        </div>
+        {this.nameLabel()}
+        
+        {this.renderChild()}
       </div>
     );
   }
 }
 
+//This class handles the in-game displays and logic for an instance of the Senator Guessing Game
 class SenatorGuess extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       index: 0,
-      currentVote: {},
-      vote: ""
-    }
+      votingRecords: [],
+      currentRecord: {},
+      gameState: 0
+    };
+
     this.handleYes = this.handleYes.bind(this);
     this.handleNo = this.handleNo.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
+    this.refreshPage = this.refreshPage.bind(this);
   }
 
-  /*pickSenator() {
-    var shuffledSenators = _.shuffle(this.props.senators);
-    console.log(shuffledSenators);
-    var current = shuffledSenators[0];
-    this.setState({
-      senatorsArray:shuffledSenators,
-      currentSenator:current
-    });
-  }*/
-
+  //A function called when the component first mounts.  It takes props from the parent 
+  //performs some shuffling algorithms on these props to make an array of questions
+  //to ask the user.
   componentWillMount() {
     var thisComponent = this;
+    var combinedVotingRecord = this.props.senatorOneVotingRecord;
+    var length = this.props.senatorOneVotingRecord.length;
+    for(var i = 0; i < length; i++) {
+      combinedVotingRecord.push(this.props.senatorTwoVotingRecord[i]);
+    }
+    combinedVotingRecord = _.shuffle(combinedVotingRecord); //random shuffle function from lodash
     this.setState({
-      index: 1,
-      currentVote: thisComponent.props.votingRecord[1],
-      vote: thisComponent.props.votingRecord[1]["option"]["value"]
-    })
-    //this.pickSenator();
+      index: 0,
+      votingRecords: combinedVotingRecord,
+      currentRecord: combinedVotingRecord[0]
+    });
   }
 
+  //This function allows the user to completely reset the questions.  It reshuffles 
+  //the array of questions it might ask and rerenders the component.
+  refreshPage() {
+    var thisComponent = this;
+    var combinedVotingRecord = this.props.senatorOneVotingRecord;
+    var length = this.props.senatorOneVotingRecord.length;
+    for(var i = 0; i < length; i++) {
+      combinedVotingRecord.push(this.props.senatorTwoVotingRecord[i]);
+    }
+    combinedVotingRecord = _.shuffle(combinedVotingRecord); //random shuffle function from lodash
+    this.setState({
+      index: 0,
+      votingRecords: combinedVotingRecord,
+      currentRecord: combinedVotingRecord[0],
+      gameState: 0
+    });
+  }
+
+  //This function handles incrementing the component to display the next question.  It updates the state
+  //to track the next question.
   nextQuestion() {
     var currentIndex = this.state.index;
     currentIndex++;
     this.setState({
       index: currentIndex,
-      currentVote: this.props.votingRecord[currentIndex],
-      vote: this.props.votingRecord[currentIndex]["option"]["value"]
-    })
+      currentRecord: this.state.votingRecords[currentIndex],
+      gameState: 0
+    });
   }
 
-  handleYes(event) {
-    if(this.state.vote === "Yea") {
-      console.log("correct");
+  //This function handles the click of the Yes button for the users answer to whether or not they think
+  //the senator voted for a particular bill.  It updates the state of the component so that a proper
+  //message can be shown as feedback to the user.
+  handleYes() {
+    if (this.state.currentRecord["option"]["value"] === "Yea") {
+      this.setState({
+        gameState: 1
+      });
     } else {
-      console.log("incorrect");
+      this.setState({
+        gameState: 2
+      });
     }
-    this.nextQuestion();
   }
 
-  handleNo(event) {
-    if(this.state.vote === "Nea") {
-      console.log("correct");
+  //This function handles the click of the No button for the users answer to whether or not they think
+  //the senator voted for a particular bill.  It updates the state of the component so that a proper
+  //message can be shown as feedback to the user.
+  handleNo() {
+    if (this.state.currentRecord["option"]["value"] === "Nay") {
+      this.setState({
+        gameState: 1
+      })
     } else {
-      console.log("incorrect");
+      this.setState({
+        gameState: 2
+      })
     }
-    this.nextQuestion();
   }
 
   render() {
-
-    /*var makeButtons = function() {
-      var buttons = [];
-      buttons.push(this.state.currentSenator['state']);
-      var shuffledStates = _.shuffle(STATES);
-      for(var i=0; i < 3; i++) {
-        buttons.push(shuffledStates[i]);
-      }
-      buttons = _.shuffle(buttons);
-      console.log(buttons);
-      buttons.map(function(current) {
-        return <SenatorGuessStateButton onClickParent={this.handleClick} state={current} />
-      });
-    }*/
-
+    var wonBox = 'box'; //these variables define conditional css rules for the messages shown when a user
+    var lostBox = 'box'; //guesses either wrong or right
+    if (this.state.gameState === 1) {
+      wonBox = 'true';
+    } else if (this.state.gameState === 2) {
+      lostBox ='true';
+    }
     return (
       <main className="bill-guess-game">
-        <h4>How do you think this senator voted on: </h4>
-        <p>{this.state.currentVote["vote"]["question"]}</p>
-        <div id="myModal" className="modal fade" role="dialog">
-          <div className="modal-dialog">
+        <h4 className="question-text">How do you think {this.state.currentRecord["person"]["firstname"] + " " + this.state.currentRecord["person"]["lastname"]} voted on: </h4>
+        <a className="bill-name-button" href={this.state.currentRecord["vote"]["link"]}>{this.state.currentRecord["vote"]["question"]}</a>
 
-            <div className="modal-content">
-              <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal">&times;</button>
-                <h4 className="modal-title">You got it right!</h4>
-              </div>
-          <div className="modal-body">
-            <p>Mark Kirk voted {this.state.vote}</p>
-          </div>
-        </div>
-          </div>
-        </div>
         <div className='yesno-buttons-box'>
           <button className="yesno-buttons" onClick={this.handleYes}>Yes</button>
           <button className="yesno-buttons" onClick={this.handleNo}>No</button>
         </div>
+        <div id={wonBox} className='congrats-box'>
+          <p className="game-alert-correct">Correct!</p>
+          <button className='yesno-buttons' onClick={this.nextQuestion}>Next Question?</button>
+        </div>
+        <div id={lostBox} className='failure-box'>
+          <p className="game-alert-incorrect">Incorrect!</p>
+          <button className='yesno-buttons' onClick={this.nextQuestion}>Next Question?</button>
+        </div>
+
+      <button className="yesno-buttons" onClick={this.refreshPage}>Reset Questions</button>
+
       </main>
     );
   }
