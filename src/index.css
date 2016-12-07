@@ -98,6 +98,9 @@ header button {
   background-color:lightgoldenrodyellow;
   padding: 8px 6px 0px 6px;
 }
+.billContent a {
+  font-weight: bold;
+}
 
 .mainCards-container {
   display: flex;

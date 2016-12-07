@@ -195,8 +195,8 @@ class SenatorGuess extends React.Component {
         <h4 className="question-text">How do you think {this.state.currentRecord["person"]["firstname"] + " " + this.state.currentRecord["person"]["lastname"]} voted on: </h4>
         <a className="bill-name-button" href={this.state.currentRecord["vote"]["link"]} target="_blank">{this.state.currentRecord["vote"]["question"]}</a>
         <div className='yesno-buttons-box'>
-          <button className="yesno-buttons" onClick={this.handleYes}>Yea</button>
-          <button className="yesno-buttons" onClick={this.handleNo}>Nay</button>
+          <button className="yesno-buttons" onClick={this.handleYes}>For</button>
+          <button className="yesno-buttons" onClick={this.handleNo}>Against</button>
         </div>
         <div id={wonBox} className='congrats-box'>
           <p className="game-alert-correct">Correct!</p>

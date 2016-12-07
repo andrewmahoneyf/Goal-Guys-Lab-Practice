@@ -165,6 +165,8 @@ class BillCard extends React.Component {
       <div className="billCard">
         <div className="billContent">
           {this.props.bill['title']}
+          <br />
+          <a href={this.props.bill['link']} alt="billLink" target="_blank"> Learn More </a>
         </div>
       </div>
     );
