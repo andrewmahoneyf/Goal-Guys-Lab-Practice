@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, hashHistory } from 'react-router';
 import { Button } from 'react-bootstrap';
 
+//Provides some simple information about the website.
 class AboutPage extends React.Component {
   render() {
     return (
@@ -18,6 +19,7 @@ class AboutPage extends React.Component {
   }
 }
 
+//Displays a list of resources for further reading.
 class ResourcesPage extends React.Component {
   render() {
     return (
@@ -38,11 +40,13 @@ class ResourcesPage extends React.Component {
   }
 }
 
+//Renders a simple contact form.
 class ContactPage extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
+  //Handles the click of the sumbit button.
   handleClick() {
     var newItem = document.createElement("H4");
     var messageNode = document.createTextNode("MESSAGE SENT!");

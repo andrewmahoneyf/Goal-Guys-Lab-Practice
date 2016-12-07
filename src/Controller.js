@@ -1,12 +1,12 @@
 var Controller = {
    getCurrentLegislation: function() {
-      return fetch('https://www.govtrack.us/api/v2/bill?congress=112&order_by=-current_status_date&limit=6')
+      return fetch('https://www.govtrack.us/api/v2/bill?congress=114&order_by=-current_status_date&limit=6')
          .then(function(response) {
             return response.json();
          });
    },
    getMoreCurrentLegislation: function(next) {
-      return fetch('https://www.govtrack.us/api/v2/bill?congress=112&order_by=-current_status_date&limit=6&offset=' + next)
+      return fetch('https://www.govtrack.us/api/v2/bill?congress=114&order_by=-current_status_date&limit=6&offset=' + next)
          .then(function(response) {
             return response.json();
          });

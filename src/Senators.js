@@ -1,9 +1,7 @@
 import React from 'react';
-import Modal from 'react-bootstrap';
 import Controller from './Controller';
 import _ from 'lodash';
-import senatorsData from './SenatorsData';
-import sampleVotingRecord from './sampleVotingRecord';
+
 //A class that handles showing a user a bill and having them guess whether or not a senator
 //from their state supported it.
 class SenatorGuessPage extends React.Component {
@@ -117,7 +115,6 @@ class SenatorGuess extends React.Component {
   //performs some shuffling algorithms on these props to make an array of questions
   //to ask the user.
   componentWillMount() {
-    var thisComponent = this;
     var combinedVotingRecord = this.props.senatorOneVotingRecord;
     var length = this.props.senatorOneVotingRecord.length;
     for(var i = 0; i < length; i++) {
@@ -133,7 +130,6 @@ class SenatorGuess extends React.Component {
   //This function allows the user to completely reset the questions.  It reshuffles 
   //the array of questions it might ask and rerenders the component.
   refreshPage() {
-    var thisComponent = this;
     var combinedVotingRecord = this.props.senatorOneVotingRecord;
     var length = this.props.senatorOneVotingRecord.length;
     for(var i = 0; i < length; i++) {
@@ -197,10 +193,10 @@ class SenatorGuess extends React.Component {
     return (
       <main className="bill-guess-game">
         <h4 className="question-text">How do you think {this.state.currentRecord["person"]["firstname"] + " " + this.state.currentRecord["person"]["lastname"]} voted on: </h4>
-        <a className="bill-name-button" href={this.state.currentRecord["vote"]["link"]}>{this.state.currentRecord["vote"]["question"]}</a>
+        <a className="bill-name-button" href={this.state.currentRecord["vote"]["link"]} target="_blank">{this.state.currentRecord["vote"]["question"]}</a>
         <div className='yesno-buttons-box'>
-          <button className="yesno-buttons" onClick={this.handleYes}>Yes</button>
-          <button className="yesno-buttons" onClick={this.handleNo}>No</button>
+          <button className="yesno-buttons" onClick={this.handleYes}>Yea</button>
+          <button className="yesno-buttons" onClick={this.handleNo}>Nay</button>
         </div>
         <div id={wonBox} className='congrats-box'>
           <p className="game-alert-correct">Correct!</p>

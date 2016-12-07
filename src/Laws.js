@@ -2,7 +2,7 @@ import React from 'react';
 import Controller from './Controller';
 import FAQ from './FaqData';
 
-
+//This is a component that renders the Bill or Rights
 class FundamentalRightsPage extends React.Component {
   render() {
     return (
@@ -37,6 +37,7 @@ class FundamentalRightsPage extends React.Component {
   }
 }
 
+//This component handles a list of current bills in congress 
 class CurrentBillsPage extends React.Component {
   constructor(props) {
     super(props);
@@ -49,6 +50,8 @@ class CurrentBillsPage extends React.Component {
     this.handleClickNext = this.handleClickNext.bind(this);
     this.handleClickSearch = this.handleClickSearch.bind(this);
   }
+  //This function gets the search results when a user enters text into the input box.
+  //It updates the state with this new information.
   handleClickSearch(event) {
     var thisComponent = this;
     Controller.getSearchResults(thisComponent.state.search)
@@ -59,6 +62,10 @@ class CurrentBillsPage extends React.Component {
         })
       })
   }
+
+  //This function is called before the page loads and simply fetches some of the 
+  //most recently active legislation in congress without sorting by any
+  //particular topic.
   componentWillMount() {
     var thisComponent = this;
     Controller.getCurrentLegislation()
@@ -69,11 +76,13 @@ class CurrentBillsPage extends React.Component {
         })
       })
   }
+  //When the user types into the input box, the state is updated with this search entry.
   handleChange(event) {
     this.setState({
       search:event.target.value
     });
   }
+  //This function implements the previous button to page through search results.
   handleClickPrevious() {
     var pageNum = this.state.page;
     if (pageNum > 0) {
@@ -95,6 +104,7 @@ class CurrentBillsPage extends React.Component {
       })
     
   }
+  //This function implements the next button to get the next set of search results.
   handleClickNext() {
     var pageNum = this.state.page;
     pageNum ++;
@@ -116,9 +126,9 @@ class CurrentBillsPage extends React.Component {
   render() {
     return (
         <main>
-          <h2>Current Bills and Votes</h2>
+          <h2>Recently Active Bills and Votes</h2>
           <div className='current-bills-main'>
-            <label htmlFor='searchBills'>Search Current Legislation: </label> {' '}
+            <label htmlFor='searchBills'>Search Active Legislation: </label> {' '}
             <input type='text' id='searchBills' name='search-bills' onChange={(e) => this.handleChange(e)}/>
             <button onClick={this.handleClickSearch}> Submit </button>
             <div>
@@ -134,6 +144,7 @@ class CurrentBillsPage extends React.Component {
   }
 }
 
+//This component renders a collection of cards that contain information about a piece of legislation.
 class BillCardCollection extends React.Component {
   render() {
     var cards = this.props.bills.map(function(currentBill, i) {
@@ -147,6 +158,7 @@ class BillCardCollection extends React.Component {
   }
 }
 
+//This component renders each individual legislation card.
 class BillCard extends React.Component {
   render() {
     return (
@@ -159,6 +171,7 @@ class BillCard extends React.Component {
   }
 }
 
+//This component render some information about common myths involved with police encounters.
 class MythsPage extends React.Component {
   render() {
     return (
@@ -189,7 +202,7 @@ class MythsPage extends React.Component {
   }
 }
 
-
+//This component handles the FAQ page.
 class FAQPage extends React.Component {
     constructor(props){
         super(props);
@@ -197,9 +210,11 @@ class FAQPage extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleTyping = this.handleTyping.bind(this);
     }
+    //Updates the state when the user enters text.
     handleTyping(event){
         this.setState( {add: event.target.value} );
    }
+   //Handles the click of the submit button.
    handleClick(){
         this.state.faqs.unshift({ q:this.state.add, a:"Thanks for your question! We will get back to you with an answer soon!" });
         var newItem = document.createElement("LI");
