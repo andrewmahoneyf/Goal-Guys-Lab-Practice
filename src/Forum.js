@@ -332,4 +332,4 @@ class ValidationErrors extends React.Component {
         );
     }
 }
-export { ForumPage };
+export default ForumPage;

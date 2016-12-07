@@ -4,46 +4,47 @@ import _ from 'lodash';
 import Qcontroller from './QuizController';
 // import $ from 'jquery';
 
-class App extends React.Component {
+// The page that will actually be rendered on the site
+class QuizPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = { legislatorInfo: [], searchValue: '' }; // Initializes the state
         this.fetchData = this.fetchData.bind(this);
         this.fetchData(this.state.searchValue);
     }
+
     // Fetches the JSON from API
     fetchData(searchTerm) {
         var thisComponent = this;
         Qcontroller.searchLegislators(searchTerm)
             .then(function (data) {
-                thisComponent.setState({ legislatorInfo: data.results })
+                console.log(data);
+                var formatQ = data.results.map(function (data) {
+                    var qObj = {};
+                    qObj['firstName'] = data.first_name;
+                    qObj['lastName'] = data.last_name;
+                    qObj['stateRank'] = data.state_rank;
+                    qObj['phoneNum'] = data.phone;
+                    qObj['birthday'] = data.birthday;
+                    return qObj;
+                })
+                thisComponent.setState({ legislatorInfo: formatQ })
+                console.log("this");
             })
             .catch((err) => this.setState({ legislatorInfo: [], searchValue: '' }));
     }
+
     // Renders the html elements in the webapp
     render() {
-        return (
-            <div className="parent-container">
-                <header>
-                    <p> Information About Your Legislators </p>
-                </header>
-                <SearchForm fetchData={this.fetchData} />
-                <Quiz legislatorInfo={this.state.legislatorInfo} fetchData={this.fetchData} />
-                <footer> Quiz </footer>
-            </div>
-        );
-    }
-}
-
-class QuizPage extends React.Component {
-    render() {
+        // making sure they are mapping
+        console.log(this.state.legislatorInfo);
         return (
             <div>
                 <main>
                     <h2>Test How Well You Know Your Legislators!</h2>
                     <p> To get started, please enter your zipcode </p>
                     <SearchForm fetchData={this.fetchData} />
-                    <Quiz />
+                    <QuizControl legislatorInfo={this.state.legislatorInfo} />
                 </main>
             </div>
         );
@@ -55,9 +56,6 @@ class Quiz extends React.Component {
         return (
             <body>
                 <div id='container'>
-                    <div id='title'>
-                        <h1>Here Is Your Quiz!</h1>
-                    </div>
                     <br />
                     <div id='quiz'></div>
                     <div class='button' id='next'><a href='#'>Next</a></div>
@@ -98,5 +96,74 @@ class SearchForm extends React.Component {
         );
     }
 }
+
+class QuizControl extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            quiz: {},
+            index: 0,
+            answers: []
+        }
+    }
+
+    handleSubmit() {
+        if (this.state.index < this.state.quiz.questions.length) {
+            this.setState({ 'index': this.state.index + 1 })
+        } else {
+            let score = this.state.score || 0
+            this.state.answers.map((answer, i) => (
+                score = score + this.state.quiz.questions[i].answers[answer].point
+            ))
+            this.setState({ 'score': score })
+        }
+    }
+
+    handleAnswerSelected(event) {
+        let list = [...this.state.answers.slice(0, this.state.index),
+        parseInt(event.target.value),
+        ...this.state.answers.slice(this.state.index + 1)]
+        this.setState({ 'answers': list })
+    }
+
+    render() {
+        const {
+            quiz, index, answers
+        } = this.state
+
+        let completed = (quiz.questions && (index === quiz.questions.length)) ? true : false
+        let numberOfQuestions = quiz.questions ? quiz.questions.length : 0
+        let score = 0
+        if (completed) {
+            this.state.answers.map((answer, i) => (
+                score = score + this.state.quiz.questions[i].answers[answer].point
+            ))
+        }
+        return (
+            <div>
+                <h2>{quiz.title}</h2>
+                {completed ?
+                    <div>
+                        <p>Congratulation, you finished the quiz</p>
+                        Your score is {score}
+                    </div>
+                    :
+                    <div>
+                        <h2>Question {index + 1} of {numberOfQuestions}</h2>
+                        {quiz.questions && index < numberOfQuestions ?
+                            <Question
+                                question={quiz.questions[index]}
+                                index={index}
+                                onAnswerSelected={(event) => this.handleAnswerSelected(event)}
+                                onSubmit={() => this.handleSubmit()}
+                                />
+                            : ''}
+                    </div>
+                }
+            </div>
+        )
+    }
+}
+
 
 export { QuizPage };
