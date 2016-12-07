@@ -4,25 +4,39 @@ import _ from 'lodash';
 import Qcontroller from './QuizController';
 // import $ from 'jquery';
 
+// The page that will actually be rendered on the site
 class QuizPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { legislatorInfo: [], searchValue: '' }; // Initializes the state
+        this.state = { legislatorInfo: [], formattedQ: [], searchValue: '' }; // Initializes the state
         this.fetchData = this.fetchData.bind(this);
         this.fetchData(this.state.searchValue);
     }
+
     // Fetches the JSON from API
     fetchData(searchTerm) {
         var thisComponent = this;
         Qcontroller.searchLegislators(searchTerm)
             .then(function (data) {
-                thisComponent.setState({ legislatorInfo: data.results })
+                console.log(data);
+                var formatQ = data.results.map(function (data) {
+                    var qObj = {};
+                    qObj['firstName'] = data.first_name;
+                    qObj['lastName'] = data.last_name;
+                    qObj['stateRank'] = data.state_rank;
+                    qObj['phoneNum'] = data.phone;
+                    qObj['birthday'] = data.birthday;
+                    return qObj;
+                })
+                thisComponent.setState({ legislatorInfo: formatQ })
                 console.log("this");
             })
             .catch((err) => this.setState({ legislatorInfo: [], searchValue: '' }));
     }
+
     // Renders the html elements in the webapp
     render() {
+        // making sure they are mapping
         console.log(this.state.legislatorInfo);
         return (
             <div>
@@ -30,7 +44,8 @@ class QuizPage extends React.Component {
                     <h2>Test How Well You Know Your Legislators!</h2>
                     <p> To get started, please enter your zipcode </p>
                     <SearchForm fetchData={this.fetchData} />
-                    <Quiz legislatorInfo={this.state.legislatorInfo} fetchData={this.fetchData} />
+                    <QuizControl legislatorInfo={this.state.legislatorInfo} />
+                    <Quiz />
                 </main>
             </div>
         );
@@ -39,22 +54,19 @@ class QuizPage extends React.Component {
 
 class Quiz extends React.Component {
     render() {
-        var that = this;
-        var formattedQ = this.props.legislatorInfo.map(function (legislatorInfo) {
-            return <Question legislatorInfo={legislatorInfo} key={legislatorInfo.govtrack_id} fetchData={that.props.fetchData} />;
-        });
-            return (
-                <body>
-                    <div id='container'>
-                        <br />
-                        <div id='quiz'></div>
-                        <div class='button' id='next'><a href='#'>Next</a></div>
-                        <div class='button' id='prev'><a href='#'>Prev</a></div>
-                        <div class='button' id='start'> <a href='#'>Start Over</a></div>
-                    </div >
-                </body >
-            );
-        }
+        return (
+            <body>
+                <div id='container'>
+                    <br />
+                    <div id='quiz'></div>
+                    <QuizControl />
+                    <div class='button' id='next'><a href='#'>Next</a></div>
+                    <div class='button' id='prev'><a href='#'>Prev</a></div>
+                    <div class='button' id='start'> <a href='#'>Start Over</a></div>
+                </div >
+            </body >
+        );
+    }
 }
 
 // Search bar that passes query to app
@@ -153,10 +165,6 @@ class QuizControl extends React.Component {
             </div>
         )
     }
-}
-
-class Questions extends React.Component {
-
 }
 
 
