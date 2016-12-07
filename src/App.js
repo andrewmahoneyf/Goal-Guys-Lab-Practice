@@ -6,6 +6,7 @@ import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import {AboutPage} from './About';
 import {FundamentalRightsPage} from './Laws';
 import {YoutubePage} from './Procedures';
+import {QuizPage} from './Quiz';
 
 
 class App extends React.Component {
@@ -75,7 +76,7 @@ class ProcedureLinks extends React.Component {
         <MenuItem eventKey={1.3}><Link to="/quiz">Legislator Knowledge</Link></MenuItem>
         <MenuItem eventKey={1.4}><Link to="/guess">Guess Senators</Link></MenuItem>
         <MenuItem divider />
-        <MenuItem eventKey={1.3}><Link to="/faq">FAQ</Link></MenuItem>
+        <MenuItem eventKey={1.5}><Link to="/faq">FAQ</Link></MenuItem>
       </NavDropdown>
     );
   }
