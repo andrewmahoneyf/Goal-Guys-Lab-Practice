@@ -113,6 +113,7 @@ class Messages extends React.Component {
                         <button className="btn btn-primary"
                             disabled={this.state.post.length === 0}
                             onClick={(e) => this.postMessage(e)}>
+                                post
                         </button>
                     </div>
                 </form>
