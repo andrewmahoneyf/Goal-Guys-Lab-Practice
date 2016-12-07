@@ -5,7 +5,6 @@ import { Link, hashHistory } from 'react-router';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import {AboutPage} from './About';
 import {FundamentalRightsPage} from './Laws';
-import {YoutubePage} from './Procedures';
 import {QuizPage} from './Quiz';
 
 
@@ -54,7 +53,7 @@ class Navigation extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <ProcedureLinks />
+            <OfficialsLinks />
             <LawLinks />
             <AboutLinks />
             <NavItem id="trump" eventKey={4}><Link to="/trump" id="trump" activeClassName="activeLink">Trump Quotes</Link></NavItem>
@@ -68,7 +67,7 @@ class Navigation extends React.Component {
   }
 }
 
-class ProcedureLinks extends React.Component {
+class OfficialsLinks extends React.Component {
   render() {
     return (
       <NavDropdown eventKey={1} title="Elected Officials" id="basic-nav-dropdown">
