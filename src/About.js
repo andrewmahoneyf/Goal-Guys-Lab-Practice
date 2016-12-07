@@ -12,7 +12,7 @@ class AboutPage extends React.Component {
         <p>Veniam dolorem cupiditate tenetur placeat nulla repellat dicta maxime architecto blanditiis non facere nesciunt quae animi quam quidem ullam, suscipit nisi ipsam voluptatem accusamus necessitatibus itaque autem in, sunt similique.</p>
         <p>In mollitia cumque sapiente ducimus quo labore magni qui quas aperiam, voluptatibus nesciunt dicta enim dignissimos doloribus tempora iusto commodi alias recusandae tempore beatae atque? Totam cum et, perferendis itaque.</p>
         <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-        <Link to="/donate"><Button block>Donate</Button></Link>
+        <Link to="/resources"><Button block>Resources</Button></Link>
         <Link to="/contact"><Button block>Contact Us</Button></Link>
       </main>
     );
@@ -66,27 +66,7 @@ class ContactPage extends React.Component {
   }
 }
 
-class DonatePage extends React.Component {
-  render() {
-    return (
-      <main>
-        <h2>Donate</h2>
-        <p>In order to keep our site up and running our team spends a lot of time and money. Any donation helps and is greatly appreciated!</p>
-        <form autocomplete="on">
-          Donation Amount: <input type="money" name="amount" min="1" required /> <br />
-          Full Name: <input type="name" name="name" /> <br />
-          E-mail: <input type="email" name="email" /> <br />
-          Card Number: <input type="number" name="cardNum" required /> <br />
-          Expiratin Date: <input type="month" name="exp" required /> <br />
-          CVV Number: <input type="number" name="cvv" min="100" max="999" required /> <br /> <br />
-          <input type="submit" value="Donate" />
-        </form>
-      </main>
-    );
-  }
-}
-
 
 export default AboutPage;
 
-export { AboutPage, ResourcesPage, ContactPage, DonatePage };
+export { AboutPage, ResourcesPage, ContactPage };

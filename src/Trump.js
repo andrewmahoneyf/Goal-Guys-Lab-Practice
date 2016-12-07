@@ -16,7 +16,6 @@ var DT_IMAGES = [
   { img: 'http://i0.kym-cdn.com/photos/images/newsfeed/001/124/859/9a2.gif' },
   { img: 'https://3.bp.blogspot.com/-ipOcb_lr5p0/V35X60n2s9I/AAAAAAAAYhE/NA5zJdBRSmw_1CVo8G7vb9UQntbMEJOrgCLcB/s1600/trump3gifgifgif.gif' },
   { img: 'https://i.kinja-img.com/gawker-media/image/upload/s--EGgm48cl--/c_scale,fl_progressive,q_80,w_800/nipaxksleoy4w0fxgazv.gif' },
-  { img: 'https://static1.squarespace.com/static/5640f08ee4b0250517e6cb18/t/578ae7d9be659461330e5146/1468721126645/' },
   { img: 'http://img2.thejournal.ie/inline/2982309/original/?width=591&version=2982309' },
   { img: 'https://byucomms302.files.wordpress.com/2015/09/trumpsalute.gif' },
   { img: 'http://esq.h-cdn.co/assets/16/21/480x240/landscape-1464273178-giphy.gif' },
@@ -78,7 +77,7 @@ class QuoteList extends React.Component {
     })
     return (
       <div>
-        <h2>Donald's infamous quotes:</h2>
+        <h2>Don't let this happen again...</h2>
         <Carousel className="cards-container">
           {quoteResults}
         </Carousel>
@@ -90,7 +89,7 @@ class QuoteList extends React.Component {
 class Quote extends React.Component {
   render() {
     var message = this.props.quoteCard
-    var num = Math.floor(Math.random() * 20);
+    var num = Math.floor(Math.random() * 19);
     return (
       <div className="card">
         <div className="content">
