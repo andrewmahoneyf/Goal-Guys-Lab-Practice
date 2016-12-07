@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { App, HomePage } from './App'; //import our component
 import TrumpQuotes from './Trump';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
-import { AboutPage, ResourcesPage, ContactPage, DonatePage } from './About';
+import { AboutPage, ResourcesPage, ContactPage } from './About';
 import { FundamentalRightsPage, CurrentBillsPage, LawyerPage, MythsPage } from './Laws';
-import { YoutubePage, TrafficPage, DoorPage, FAQPage, SenatorGuessPage } from './Procedures';
+import { FAQPage, SenatorGuessPage } from './Procedures';
 import { QuizPage } from './Quiz';
 
 //load our CSS file
@@ -21,14 +21,11 @@ ReactDOM.render(
       <Route path="about" component={AboutPage} />
       <Route path="resources" component={ResourcesPage} />
       <Route path="contact" component={ContactPage} />
-      <Route path="donate" component={DonatePage} />
       <Route path="rights" component={FundamentalRightsPage} />
       <Route path="bills" component={CurrentBillsPage} />
       <Route path="guess" component={SenatorGuessPage} />
       <Route path="lawyers" component={LawyerPage} />
       <Route path="myths" component={MythsPage} />
-      <Route path="youtube" component={YoutubePage} />
-      <Route path="traffic" component={TrafficPage} />
       <Route path="quiz" component={QuizPage} />
       <Route path="faq" component={FAQPage} />
     </Route>

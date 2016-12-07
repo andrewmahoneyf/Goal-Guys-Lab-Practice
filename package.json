@@ -5,7 +5,6 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "lodash": "^4.17.2",
     "react-scripts": "0.7.0"
   },
   "dependencies": {
