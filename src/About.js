@@ -7,11 +7,10 @@ class AboutPage extends React.Component {
     return (
       <main>
         <h2>About Us</h2>
-        <p>Here is some information about us. Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-        <blockquote>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</blockquote>
-        <p>Veniam dolorem cupiditate tenetur placeat nulla repellat dicta maxime architecto blanditiis non facere nesciunt quae animi quam quidem ullam, suscipit nisi ipsam voluptatem accusamus necessitatibus itaque autem in, sunt similique.</p>
-        <p>In mollitia cumque sapiente ducimus quo labore magni qui quas aperiam, voluptatibus nesciunt dicta enim dignissimos doloribus tempora iusto commodi alias recusandae tempore beatae atque? Totam cum et, perferendis itaque.</p>
-        <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+        <p>Here is some information about us.</p>
+        <blockquote>The main purpose of this website is to get people involved in the legislative process by showing them what it's really like.</blockquote>
+        <p>We believe that by showing people how their government really works, we will increase voter awareness and get people to really
+        care about their election decisions.</p>
         <Link to="/resources"><Button block>Resources</Button></Link>
         <Link to="/contact"><Button block>Contact Us</Button></Link>
       </main>
