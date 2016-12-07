@@ -4,7 +4,6 @@ import './index.css'; //load CSS for this module
 import { Link, hashHistory } from 'react-router';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import {AboutPage} from './About';
-import {FundamentalRightsPage} from './Laws';
 
 
 class App extends React.Component {
@@ -57,7 +56,7 @@ class Navigation extends React.Component {
             <AboutLinks />
           </Nav>
           <Nav pullRight>
-            <NavItem id="forum" eventKey={4}><Link to="/forum" id="forum" activeClassName="activeLink">Forum</Link></NavItem>
+            <NavItem id="forum" eventKey={4}><Link to="/forum" id="forum">Forum</Link></NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
