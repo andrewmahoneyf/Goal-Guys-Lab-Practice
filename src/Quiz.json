@@ -1,0 +1,47 @@
+{
+  "title": "Current Official: Maria Cantwell",
+  "questions": [
+    {
+      "question": "What is this official's phone number?",
+      "answers": [
+        {
+          "point": 1,
+          "label": "202-224-3441"
+        },
+        {
+          "point": 0,
+          "label": "206-391-2941"
+        },
+        {
+          "point": 0,
+          "label": "425-001-5900"
+        },
+        {
+          "point": 0,
+          "label": "360-951-2873"
+        }
+      ]
+    },
+    {
+      "question": "What is this official's state rank?",
+      "answers": [
+        {
+          "point": 0,
+          "label": "Senior"
+        },
+        {
+          "point": 1,
+          "label": "Junior"
+        },
+        {
+          "point": 0,
+          "label": "Freshman"
+        },
+        {
+          "point": 0,
+          "label": "Sohpomore"
+        }
+      ]
+    }
+  ]
+}

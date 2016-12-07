@@ -262,6 +262,22 @@ a.bill-name-button:hover {
   font-weight: 3;
 }
 
+.subbuttons {
+  padding: 10px;
+  text-align: center;
+  background-color: navy;
+  border-color: white;
+  color: white;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+h3 .kn {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-left: 50%;
+}
+
 .yesno-buttons-box {
   padding: 20px;
 }
