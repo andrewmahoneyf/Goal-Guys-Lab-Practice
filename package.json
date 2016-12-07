@@ -5,10 +5,12 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "firebase": "^3.6.3",
     "react-scripts": "0.7.0"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "firebase": "^3.6.3",
     "jquery": "^3.1.1",
     "lodash": "^4.17.2",
     "react": "^15.3.2",

@@ -6,6 +6,7 @@ import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import {AboutPage} from './About';
 import {FundamentalRightsPage} from './Laws';
 import {YoutubePage} from './Procedures';
+import {QuizPage} from './Quiz';
 
 
 class App extends React.Component {
@@ -73,7 +74,7 @@ class ProcedureLinks extends React.Component {
         <MenuItem eventKey={1.1}><Link to="/quiz">Legislator Knowledge</Link></MenuItem>
         <MenuItem eventKey={1.2}><Link to="/guess">Guess Senators</Link></MenuItem>
         <MenuItem divider />
-        <MenuItem eventKey={1.3}><Link to="/faq">FAQ</Link></MenuItem>
+        <MenuItem eventKey={1.5}><Link to="/faq">FAQ</Link></MenuItem>
       </NavDropdown>
     );
   }
@@ -98,8 +99,9 @@ class AboutLinks extends React.Component {
       <NavDropdown eventKey={3} title="About" id="basic-nav-dropdown">
         <MenuItem eventKey={3.1}><Link to="/about">About Us</Link></MenuItem>
         <MenuItem eventKey={3.2}><Link to="/resources">Resources</Link></MenuItem>
+        <MenuItem eventKey={3.4}><Link to="/forum">Forum</Link></MenuItem>
         <MenuItem divider />
-        <MenuItem eventKey={3.3}><Link to="/contact">Contact Us</Link></MenuItem>
+        <MenuItem eventKey={3.5}><Link to="/contact">Contact Us</Link></MenuItem>
       </NavDropdown>
     );
   }

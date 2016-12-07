@@ -67,7 +67,6 @@ class ContactPage extends React.Component {
 }
 
 
-
 export default AboutPage;
 
 export { AboutPage, ResourcesPage, ContactPage };
