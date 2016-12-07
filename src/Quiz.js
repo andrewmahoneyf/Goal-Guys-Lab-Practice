@@ -8,7 +8,7 @@ import Qcontroller from './QuizController';
 class QuizPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { legislatorInfo: [], formattedQ: [], searchValue: '' }; // Initializes the state
+        this.state = { legislatorInfo: [], searchValue: '' }; // Initializes the state
         this.fetchData = this.fetchData.bind(this);
         this.fetchData(this.state.searchValue);
     }
@@ -45,7 +45,6 @@ class QuizPage extends React.Component {
                     <p> To get started, please enter your zipcode </p>
                     <SearchForm fetchData={this.fetchData} />
                     <QuizControl legislatorInfo={this.state.legislatorInfo} />
-                    <Quiz />
                 </main>
             </div>
         );
@@ -59,7 +58,6 @@ class Quiz extends React.Component {
                 <div id='container'>
                     <br />
                     <div id='quiz'></div>
-                    <QuizControl />
                     <div class='button' id='next'><a href='#'>Next</a></div>
                     <div class='button' id='prev'><a href='#'>Prev</a></div>
                     <div class='button' id='start'> <a href='#'>Start Over</a></div>
@@ -151,7 +149,7 @@ class QuizControl extends React.Component {
                     </div>
                     :
                     <div>
-                        <h2>Question {index + 1}of {numberOfQuestions}</h2>
+                        <h2>Question {index + 1} of {numberOfQuestions}</h2>
                         {quiz.questions && index < numberOfQuestions ?
                             <Question
                                 question={quiz.questions[index]}
