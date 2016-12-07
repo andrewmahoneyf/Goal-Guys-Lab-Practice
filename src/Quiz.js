@@ -52,7 +52,6 @@ class Quiz extends React.Component {
                     <div class='button' id='next'><a href='#'>Next</a></div>
                     <div class='button' id='prev'><a href='#'>Prev</a></div>
                     <div class='button' id='start'> <a href='#'>Start Over</a></div>
-
                 </div >
             </body >
         );
@@ -155,6 +154,10 @@ class QuizControl extends React.Component {
             </div>
         )
     }
+}
+
+class Questions extends React.Component {
+
 }
 
 
