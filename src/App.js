@@ -5,8 +5,6 @@ import { Link, hashHistory } from 'react-router';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import {AboutPage} from './About';
 import {FundamentalRightsPage} from './Laws';
-import {YoutubePage} from './Procedures';
-import {QuizPage} from './Quiz';
 
 
 class App extends React.Component {
@@ -54,12 +52,13 @@ class Navigation extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <ProcedureLinks />
+            <OfficialsLinks />
             <LawLinks />
             <AboutLinks />
+            <NavItem id="trump" eventKey={4}><Link to="/trump" id="trump" activeClassName="activeLink">Trump Quotes</Link></NavItem>
           </Nav>
           <Nav pullRight>
-            <NavItem id="trump" eventKey={4}><Link to="/trump" id="trump" activeClassName="activeLink">Trump Quotes</Link></NavItem>
+            <NavItem id="forum" eventKey={5}><Link to="/forum" id="forum" activeClassName="activeLink">Forum</Link></NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -67,14 +66,12 @@ class Navigation extends React.Component {
   }
 }
 
-class ProcedureLinks extends React.Component {
+class OfficialsLinks extends React.Component {
   render() {
     return (
-      <NavDropdown eventKey={1} title="General Procedures" id="basic-nav-dropdown">
+      <NavDropdown eventKey={1} title="Elected Officials" id="basic-nav-dropdown">
         <MenuItem eventKey={1.1}><Link to="/quiz">Legislator Knowledge</Link></MenuItem>
         <MenuItem eventKey={1.2}><Link to="/guess">Guess Senators</Link></MenuItem>
-        <MenuItem divider />
-        <MenuItem eventKey={1.5}><Link to="/faq">FAQ</Link></MenuItem>
       </NavDropdown>
     );
   }
@@ -86,8 +83,9 @@ class LawLinks extends React.Component {
       <NavDropdown eventKey={2} title="Laws" id="basic-nav-dropdown">
         <MenuItem eventKey={2.1}><Link to="/rights">Fundamental Rights</Link></MenuItem>
         <MenuItem eventKey={2.2}><Link to="/bills">Current Bills and Votes</Link></MenuItem>
-        <MenuItem eventKey={2.3}><Link to="/lawyers">Contact a Lawyer</Link></MenuItem>
-        <MenuItem eventKey={2.4}><Link to="/myths">Popular Myths</Link></MenuItem>
+        <MenuItem eventKey={2.3}><Link to="/myths">Popular Myths</Link></MenuItem>
+        <MenuItem divider />
+        <MenuItem eventKey={1.5}><Link to="/faq">FAQ</Link></MenuItem>
       </NavDropdown>
     );
   }
@@ -99,7 +97,6 @@ class AboutLinks extends React.Component {
       <NavDropdown eventKey={3} title="About" id="basic-nav-dropdown">
         <MenuItem eventKey={3.1}><Link to="/about">About Us</Link></MenuItem>
         <MenuItem eventKey={3.2}><Link to="/resources">Resources</Link></MenuItem>
-        <MenuItem eventKey={3.4}><Link to="/forum">Forum</Link></MenuItem>
         <MenuItem divider />
         <MenuItem eventKey={3.5}><Link to="/contact">Contact Us</Link></MenuItem>
       </NavDropdown>
