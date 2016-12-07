@@ -86,7 +86,7 @@ header button {
     font-size: 22px;
     text-align: center;
     padding: 5px;
-    flex-basis: 33%;
+    flex-basis: 100%;
     margin-top: 1em;
     vertical-align: -webkit-baseline-middle;
 }
@@ -99,7 +99,41 @@ header button {
   padding: 8px 6px 0px 6px;
 }
 
-
+.mainCards-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1em -1em;
+}
+.mainCard {
+    font-size: 22px;
+    text-align: center;
+    padding: 0 20px 0 20px;
+    flex-basis: 100%;
+    margin-bottom: 1em;
+    vertical-align: -webkit-baseline-middle;
+}
+.mainContent {
+  border: 1px solid rgba(160, 160, 160, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+  height: 200px;
+  background-color:slateblue;
+  color: white;
+  padding-top: 10px;
+  overflow: hidden;
+  font-weight: bold;
+  opacity: 0.8;
+}
+.mainContent img {
+  max-height: 160px;
+  height: 160px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.mainContent:hover {
+    opacity: 1;
+}
 
 
 body::-webkit-scrollbar{ width: 1em;}
@@ -180,10 +214,6 @@ html {
   box-sizing: border-box;
 }
 
-.bill-guess-game {
-
-}
-
 .yesno-buttons-box {
   padding: 20px;
 }
@@ -252,6 +282,9 @@ footer {
     footer {
       font-size: 12px;
     }
+    .mainCard, .billCard {
+      flex-basis: 50%;
+    }
 }
 
 @media (min-width: 992px){
@@ -269,6 +302,9 @@ footer {
     }
     footer {
       font-size: 14px;
+    }
+    .mainCard, .billCard {
+      flex-basis: 33%;
     }
 }
 
