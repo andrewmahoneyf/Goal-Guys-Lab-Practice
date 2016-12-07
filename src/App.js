@@ -5,7 +5,6 @@ import { Link, hashHistory } from 'react-router';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import {AboutPage} from './About';
 import {FundamentalRightsPage} from './Laws';
-import {QuizPage} from './Quiz';
 
 
 class App extends React.Component {

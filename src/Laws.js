@@ -41,56 +41,77 @@ class FundamentalRightsPage extends React.Component {
 class CurrentBillsPage extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       search:'',
       bills: [],
       page: 0
     };
-
     this.handleClickPrevious = this.handleClickPrevious.bind(this);
     this.handleClickNext = this.handleClickNext.bind(this);
     this.handleClickSearch = this.handleClickSearch.bind(this);
   }
-
   handleClickSearch(event) {
     var thisComponent = this;
     Controller.getSearchResults(thisComponent.state.search)
       .then(function(data) {
-        console.log(data);
         thisComponent.setState({
           bills:data["objects"],
           page: 0
         })
       })
   }
-
   componentWillMount() {
     var thisComponent = this;
     Controller.getCurrentLegislation()
       .then(function(data) {
-        console.log(data);
         thisComponent.setState({
           bills:data["objects"],
           page:0
         })
       })
   }
-
   handleChange(event) {
     this.setState({
       search:event.target.value
     });
   }
-
   handleClickPrevious() {
+    var pageNum = this.state.page;
+    pageNum --;
+    var newState ={
+      search:'',
+      bills: [],
+      page: pageNum
+    };
+    this.setState(newState);
+    var thisComponent = this;
+    Controller.getMoreCurrentLegislation(pageNum)
+      .then(function(data) {
+        thisComponent.setState({
+          bills:data["objects"],
+          page: pageNum
+        })
+      })
     
   }
-
   handleClickNext() {
-
+    var pageNum = this.state.page;
+    pageNum ++;
+    var newState ={
+      search:'',
+      bills: [],
+      page: pageNum
+    };
+    this.setState(newState);
+    var thisComponent = this;
+    Controller.getMoreCurrentLegislation(pageNum)
+      .then(function(data) {
+        thisComponent.setState({
+          bills:data["objects"],
+          page: pageNum
+        })
+      })
   }
-
   render() {
     return (
         <main>
@@ -100,7 +121,7 @@ class CurrentBillsPage extends React.Component {
             <input type='text' id='searchBills' name='search-bills' onChange={(e) => this.handleChange(e)}/>
             <button onClick={this.handleClickSearch}> Submit </button>
             <div>
-              <button onClick={this.handleClickPrev} className='page-through-button'> Previous </button>
+              <button onClick={this.handleClickPrevious} className='page-through-button'> Previous </button>
               <button onClick={this.handleClickNext} className='page-through-button'> Next </button>
             </div>
             <div className='current-bills-results'>
@@ -118,7 +139,7 @@ class BillCardCollection extends React.Component {
       return <BillCard bill={currentBill} key={i} />
     });
     return (
-      <main>
+      <main  className="billCards-container">
         {cards}
       </main>
     );
@@ -128,44 +149,13 @@ class BillCardCollection extends React.Component {
 class BillCard extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state= {
-      side: 0
-    };
   }
-
-sideOfCard() {
-  if (this.state.side === 0) {
-    return <BillCardFront bill={this.props.bill} />
-  } else {
-    return <BillCardBack bill={this.props.bill} />
-  }
-}
-
   render() {
     return (
-      <main>
-        {this.sideOfCard()}
-      </main>
-    );
-  }
-}
-
-class BillCardFront extends React.Component {
-  render() {
-    return (
-      <div>
-        <p>{this.props.bill['title']}</p>
-      </div>
-    );
-  }
-}
-
-class BillCardBack extends React.Component {
-  render() {
-    return (
-      <div>
-        <p>More Info Here</p>
+      <div className="billCard">
+        <div className="billContent">
+          {this.props.bill['title']}
+        </div>
       </div>
     );
   }
