@@ -77,7 +77,9 @@ class CurrentBillsPage extends React.Component {
   }
   handleClickPrevious() {
     var pageNum = this.state.page;
-    pageNum --;
+    if (pageNum > 0) {
+      pageNum --;
+    }
     var newState ={
       search:'',
       bills: [],
