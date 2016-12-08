@@ -5,5 +5,5 @@ This folder contains code for the Goal Guys final project for Info 343 Client-Si
 
 Our team consists of four Undergraduate students at the University of Washington who met in INFO 343 Client-Side Web Development. Our names are Andrew, Nattanon, Ryan, and Darryl. We are currently studying Informatics in order to advance our programing and web-development skills to prepare us for the tech industry. This project is our first together and acts as our final for INFO 343. If you want to learn more about us or have any questions, please feel free to contact us below!
 
-To view our project, visit: [Our website] "https://andrewmahoneyf.github.io/final-project/"
+To view our project, visit: [Our website](https://andrewmahoneyf.github.io/Goal-Guys-Project/)
 
