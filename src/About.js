@@ -14,8 +14,8 @@ class AboutPage extends React.Component {
         really care about their election decisions. It is also imperative that this information is easily accessible to every American citizen so we made the 
         website clearly translatable by selecting a language in the header.  </p>
         <blockquote>Get involved today and make a difference tomorrow!</blockquote>
-        <p> Our team consists of four Undergraduate students at the University of Washington who met in INFO 343 Client-Side Web Development. Our names are Andrew, Non, Ryan and Darryl
-        and we are studying Informatics in order to advance our programing and web-development skills to prepare us for the tech industry. This project is our first together and acts as 
+        <p> Our team consists of four undergraduate students at the University of Washington who met in INFO 343 Client-Side Web Development. Our names are Andrew, Nattanon, Ryan, and Darryl.
+        We are currently studying Informatics in order to advance our programing and web-development skills to prepare us for the tech industry. This project is our first together and acts as 
         our final for INFO 343. If you want to learn more about us or have any questions, please feel free to contact us below!</p>
       
         <Link to="/resources"><Button block>Resources</Button></Link>
