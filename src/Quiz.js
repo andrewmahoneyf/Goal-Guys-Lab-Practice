@@ -24,7 +24,7 @@ class QuizPage extends React.Component {
         var thisComponent = this;
         Qcontroller.searchLegislators(searchTerm)
             .then(function(data) {
-                console.log(data);
+                //console.log(data);
                 var formatQ = data.results.map(function(data) {
                     var qObj = {};
                     qObj['firstName'] = data.first_name;
@@ -38,7 +38,7 @@ class QuizPage extends React.Component {
                     return qObj;
                 })
                 thisComponent.setState({ legislatorInfo: formatQ }, () => { console.log('state set'); console.log(this.state) })
-                console.log("this");
+                //console.log("this");
             })
             .catch((err) => this.setState({ legislatorInfo: [], searchValue: '' }));
     }
@@ -46,8 +46,8 @@ class QuizPage extends React.Component {
     // Renders the html elements in the webapp
     render() {
         // making sure they are mapping
-        console.log('in render')
-        console.log(this.state.legislatorInfo);
+        // console.log('in render')
+        // console.log(this.state.legislatorInfo);
         return (
             <div>
                 <main>
@@ -117,8 +117,8 @@ class QuizCont extends React.Component {
     }
 
     handleStart() {
-        console.log('in handle start')
-        console.log(this.props)
+        // console.log('in handle start')
+        // console.log(this.props)
         var thisComponent = this;
         thisComponent.setState({
             indexQ: 0,
@@ -131,7 +131,7 @@ class QuizCont extends React.Component {
             stateRank: 'senior',
             answer: []
         })
-        console.log(this.state.quiz, "quiz info");
+        //console.log(this.state.quiz, "quiz info");
     }
 
     // When clicking next, the question is updated. Once Questions are through, 
@@ -151,10 +151,10 @@ class QuizCont extends React.Component {
 
     render() {
         // To check why the props are not being passed down properly
-        console.log(this.props.legislatorInformation, "checking prop");
-        var quizz = this.props.legislatorInformation;
-        console.log(this.quizz, "this quizz")
-        console.log(this.state.quiz, "state of quiz");
+        // console.log(this.props.legislatorInformation, "checking prop");
+        // var quizz = this.props.legislatorInformation;
+        // console.log(this.quizz, "this quizz")
+        // console.log(this.state.quiz, "state of quiz");
 
         return (
             <div>
